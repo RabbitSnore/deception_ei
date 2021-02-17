@@ -45,7 +45,6 @@ ei_data <- raw %>%
 accuracy_long <- accuracy_long %>% 
   left_join(ei_data, by = "ss")
 
-
 ## Might as well grab confidence...
   
 confidence <- raw %>% 
@@ -59,3 +58,16 @@ confidence_long <- confidence %>%
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "confid_(.*)_(.*)")
   
+
+## Join confidence with the rest of its friends
+
+accuracy_long <- accuracy_long %>% 
+  left_join(confidence_long, by = c("ss", "sender", "veracity"))
+
+## Reorder columns
+
+accuracy_long <- accuracy_long %>% 
+  select(ss, sender, veracity, accuracy, confidence, everything())
+
+
+
