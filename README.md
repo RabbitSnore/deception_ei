@@ -5,6 +5,7 @@
 
 - Wrangling
   - Change all the column names to lowercase
+  - Long form accuracy data
 
 - Screening
   - Check familiarity with senders
