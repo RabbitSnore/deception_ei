@@ -32,3 +32,15 @@ accuracy_long <- accuracy %>%
     values_to = "accuracy"
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "accur_(.*)_(.*)")
+
+## Select EI and IRI measures
+
+ei_data <- raw %>% 
+  select(ss,
+         ends_with("_st"),
+         iri_pt, iri_ec, iri_fs, iri_pd)
+  
+  
+  
+  
+  
