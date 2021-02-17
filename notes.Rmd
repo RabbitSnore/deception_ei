@@ -1,0 +1,39 @@
+---
+title: "Notes on Deception Detection and Emotional Intelligence Project"
+author: "Timothy J. Luke"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load packages 
+
+packages <- c("tidyverse", "readxl")
+
+lapply(packages, library, character.only = TRUE)
+
+# Import data and codebook
+
+raw <- read_xlsx("deception_ei_data.xlsx")
+
+codebook <- read_csv("deception_ei_codebook.csv")
+
+```
+
+# Initial Exploration
+
+## Codebook
+
+```{r}
+codebook %>% 
+  knitr::kable()
+```
+
+## Raw Data
+
+```{r}
+glimpse(raw)
+```
+

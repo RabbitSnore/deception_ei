@@ -39,7 +39,6 @@ vignettes/*.pdf
 .Renviron
 
 # Raw files
-Data Tiziana_Lie Detection_EI_Empathy.xlsx
 ACP-20-0188_Proof_hi.pdf
 *.Rproj
 deception_ei_data.xlsx
