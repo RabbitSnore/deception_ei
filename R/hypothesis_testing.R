@@ -10,7 +10,7 @@ packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "lme4")
 
 lapply(packages, library, character.only = TRUE)
 
-# HYPOTHESIS 1: Emotional intelligence, empathy, and accuracy
+# HYPOTHESIS 1: Emotional intelligence, empathy, and accuracy -------------------
 
 ## Screening and assumption checking
 
@@ -156,12 +156,65 @@ predict_plot <-
   ) +
   theme_classic()
 
-#### Confidence intervals
+### Robustness checks
 
-model_ci <- confint(model_ei, level = .95, parm = )
-model_ci_or <- exp(model_ci) # Odds ratios
+#### Removing empathy
 
+model_ei_red <- glmer(accuracy ~ veracity  
+                  + r1g_st + r2g_st + r3g_st + r4g_st 
+                  + (1 + veracity|ss) + (1|sender), 
+                  data = model_data, 
+                  family = binomial(link = "logit")
+                  )
+# The effect for EI Perceiving persists when removing the empathy variables
 
-# HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence
+#### Removing veracity
+
+model_ei_ver <- glmer(accuracy ~ r1g_st + r2g_st + r3g_st + r4g_st 
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+# The effect for EI Perceiving persists when removing veracity
+
+#### Using only EI perceiving
+
+model_ei_per <- glmer(accuracy ~ veracity  
+                      + r1g_st 
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+# The coefficient for EI Perceiving remains significant when removing other predictors
+
+#### Using only EI using
+
+model_ei_use <- glmer(accuracy ~ veracity  
+                      + r2g_st 
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+# The negative coefficient for EI Using becomes nonsignificant when other predictors are removed
+
+#### Using EI subscales
+
+model_ei_sub <- glmer(accuracy ~ veracity + expg_st + strg_st
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+# No significant effects for the EI bifactor scores
+
+#### Using EI total score
+
+model_ei_tot <- glmer(accuracy ~ veracity + ttg_st
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+# No significant effect for the EI total score
+
+# HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence -------
 
 
