@@ -40,7 +40,13 @@ ei_data <- raw %>%
          ends_with("_st"),
          iri_pt, iri_ec, iri_fs, iri_pd)
   
-  
+## Join EI and IRI measures with accuracy
+
+accuracy_long <- accuracy_long %>% 
+  left_join(ei_data, by = "ss")
+
+
+## Might as well grab confidence...
   
   
   
