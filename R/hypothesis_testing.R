@@ -78,21 +78,35 @@ model_base <- glmer(accuracy ~ veracity + (1 + veracity|ss) + (1|sender),
 
 ### Add empathy
 
-model_emp <- glmer(accuracy ~ veracity + iri_pt + iri_ec + iri_fs + iri_pd + (1 + veracity|ss) + (1|sender), 
-                    data = model_data, 
-                    family = binomial(link = "logit")
-                    )
+model_emp <- glmer(accuracy ~ veracity 
+                   + iri_pt + iri_ec + iri_fs + iri_pd 
+                   + (1 + veracity|ss) + (1|sender), 
+                   data = model_data, 
+                   family = binomial(link = "logit")
+                   )
 
 ### Add emotional intelligence
 
-
+model_ei <- glmer(accuracy ~ veracity 
+                   + iri_pt + iri_ec + iri_fs + iri_pd 
+                   + r1g_st + r2g_st + r3g_st + r4g_st 
+                   + (1 + veracity|ss) + (1|sender), 
+                   data = model_data, 
+                   family = binomial(link = "logit")
+                   )
 
 ### Compare models
 
-
+lrt_tests <- anova(model_base, model_emp, model_ei)
 
 ### Preferred model
 
+#### Confidence intervals
+
+model_ci <- confint(model_ei, level = .95)
+model_ci_or <- exp(model_ci) # Odds ratios
 
 
 # HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence
+
+
