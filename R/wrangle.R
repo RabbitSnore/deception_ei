@@ -48,5 +48,14 @@ accuracy_long <- accuracy_long %>%
 
 ## Might as well grab confidence...
   
-  
+confidence <- raw %>% 
+  select(ss, starts_with("confid_"))
+
+confidence_long <- confidence %>% 
+  pivot_longer(
+    cols = starts_with("confid_"),
+    names_to = "name",
+    values_to = "confidence"
+  ) %>% 
+  extract(col = "name", into = c("sender", "veracity"), regex = "confid_(.*)_(.*)")
   
