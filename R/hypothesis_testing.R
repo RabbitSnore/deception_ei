@@ -57,14 +57,14 @@ accuracy_long$veracity <- factor(accuracy_long$veracity, levels = c("truth", "li
 
 model_data <- accuracy_long %>% 
   mutate(
-    iri_pt = iri_pt/10,
-    iri_ec = iri_ec/10,
-    iri_fs = iri_fs/10,
-    iri_pd = iri_pd/10,
-    r1g_st = r1g_st/10,
-    r2g_st = r2g_st/10,
-    r3g_st = r3g_st/10,
-    r4g_st = r4g_st/10
+    iri_pt = scale(iri_pt/10, scale = FALSE),
+    iri_ec = scale(iri_ec/10, scale = FALSE),
+    iri_fs = scale(iri_fs/10, scale = FALSE),
+    iri_pd = scale(iri_pd/10, scale = FALSE),
+    r1g_st = scale(r1g_st/10, scale = FALSE),
+    r2g_st = scale(r2g_st/10, scale = FALSE),
+    r3g_st = scale(r3g_st/10, scale = FALSE),
+    r4g_st = scale(r4g_st/10, scale = FALSE)
   )
 
 ## Model specification and fitting
@@ -101,9 +101,64 @@ lrt_tests <- anova(model_base, model_emp, model_ei)
 
 ### Preferred model
 
+#### Predicted accuracy
+
+predict_data <- model_data
+
+pred_seq <- seq(from = min(model_data$r1g_st), to = max(model_data$r1g_st), length.out = 100)
+
+predict_probabilities <- lapply(pred_seq, function(x) {
+  
+  predict_data$r1g_st <- x
+  
+  predict(model_ei, newdata = predict_data, type = "response")
+
+}
+
+)
+
+prob_mean  <- sapply(predict_probabilities, mean)
+prob_upper <- sapply(predict_probabilities, quantile, probs = .95)
+prob_lower <- sapply(predict_probabilities, quantile, probs = .05)
+
+predict_plot_data <- data.frame(pred_seq, prob_mean, prob_upper, prob_lower)
+
+predict_plot <- 
+  ggplot(predict_plot_data,
+         aes(
+           x = pred_seq,
+           y = prob_mean
+         )) +
+  geom_line(
+    size = 1
+  ) +
+  coord_cartesian(
+    ylim = c(0, 1)
+  ) +
+  geom_hline(
+    yintercept = .50,
+    linetype = "dashed"
+  ) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dotted"
+  ) +
+  scale_x_continuous(
+    breaks = seq(-3, 3, 1) + round(mean(accuracy_long$r1g_st)) - mean(accuracy_long$r1g_st),
+    labels = round((seq(-3, 3, 1) * 10) + mean(accuracy_long$r1g_st))
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, .1)
+  ) +
+  labs(
+    x = "Emotional Intelligence (Perceiving)",
+    y = "Mean Predicted Accuracy"
+  ) +
+  theme_classic()
+
 #### Confidence intervals
 
-model_ci <- confint(model_ei, level = .95)
+model_ci <- confint(model_ei, level = .95, parm = )
 model_ci_or <- exp(model_ci) # Odds ratios
 
 
