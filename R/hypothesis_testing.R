@@ -6,7 +6,7 @@
 
 # Load packages 
 
-packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "lme4")
+packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "lme4", "lmerTest")
 
 lapply(packages, library, character.only = TRUE)
 
@@ -235,7 +235,7 @@ model_conf_ei <- glmer(accuracy ~ veracity + confidence
                        family = binomial(link = "logit")
                        )
 
-# The Perceiving subscale seems to be the best candidate for possibly interacting with confidence.
+# The Perceiving subscale seems to be the best candidate for possibly interacting with confidence, so I will use it here instead of trying every EI facet.
 
 ## Add interaction
 
@@ -254,4 +254,47 @@ lrt_confidence <- anova(model_conf_base, model_conf_ei, model_conf_ei_int)
 
 # HYPOTHESIS 3: Emotional intelligence and criteria for judgment ----------------
 
+## Function for criteria model fitting
 
+criteria_model <- function(data) {
+  
+  # Base
+  
+  model_1 <- lmer(criteria ~ veracity
+                  + (1 + veracity|ss) + (1|sender), 
+                  data = data)
+  
+  # Add empathy
+  
+  model_2 <- lmer(criteria ~ veracity 
+                  + iri_pt + iri_ec + iri_fs + iri_pd 
+                  + (1 + veracity|ss) + (1|sender), 
+                  data = data)
+  
+  # Add emotional intelligence
+  
+  model_3 <- lmer(criteria ~ veracity 
+                  + iri_pt + iri_ec + iri_fs + iri_pd 
+                  + r1g_st + r2g_st + r3g_st + r4g_st 
+                  + (1 + veracity|ss) + (1|sender), 
+                  data = data)
+  
+  ## Model comparison
+  
+  lrt <- anova(model_1, model_2, model_3)
+  
+  model_list <- list(model_1, model_2, model_3, lrt)
+  
+  return(model_list)
+    
+}
+
+cognitive_models  <- criteria_model(data = cog_long)
+emotion_models    <- criteria_model(data = emotion_long)
+expressive_models <- criteria_model(data = expressive_long)
+paraverbal_models <- criteria_model(data = paraverbal_long)
+
+# Cognitive models seem not to fit any better with empathy and EI added.
+# Emotion model seems to benefit from the addition of empathy but not EI. The IRI Fantasy subscale seems to be significant.
+# The expressive models do not seem to benefit from empathy or EI.
+# Neither do the paraverbal models

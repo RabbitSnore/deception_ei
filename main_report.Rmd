@@ -1,0 +1,26 @@
+---
+title: "Empathy, Emotional Intelligence, and Deception Detection -- Main Report"
+author: "Timothy J. Luke"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+source("./R/wrangle.R")
+source("./R/hypothesis_testing.R")
+source("./R/signal_detection.R")
+```
+
+# Background
+
+The author of this report (Timothy) reviewed a manuscript for _Applied Cognitive Psychology_, which was ultimately rejected for publication. In that review, I recommended several potential ways of improving the statistical analyses and the interpretations thereof. I signed the review. Some time after the manuscript was rejected, the main author contacted me and asked if I would like to reanalyze the data and implement some of the things I recommended. I said yes.
+
+This is the outcome.
+
+# Hypothesis 1
+
+# Hypothesis 2
+
+# Hypothesis 3

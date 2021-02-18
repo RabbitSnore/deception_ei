@@ -81,7 +81,7 @@ cog_long <- cog_complex %>%
   pivot_longer(
     cols = starts_with("cc_"),
     names_to = "name",
-    values_to = "critera"
+    values_to = "criteria"
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "cc_(.*)_(.*)")
 
@@ -95,7 +95,7 @@ emotion_long <- emotion %>%
   pivot_longer(
     cols = starts_with("ef_"),
     names_to = "name",
-    values_to = "critera"
+    values_to = "criteria"
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "ef_(.*)_(.*)")
 
@@ -109,7 +109,7 @@ expressive_long <- expressive %>%
   pivot_longer(
     cols = starts_with("expi_"),
     names_to = "name",
-    values_to = "critera"
+    values_to = "criteria"
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "expi_(.*)_(.*)")
 
@@ -123,7 +123,7 @@ paraverbal_long <- paraverbal %>%
   pivot_longer(
     cols = starts_with("pa_"),
     names_to = "name",
-    values_to = "critera"
+    values_to = "criteria"
   ) %>% 
   extract(col = "name", into = c("sender", "veracity"), regex = "pa_(.*)_(.*)")
 

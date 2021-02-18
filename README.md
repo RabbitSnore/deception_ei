@@ -1,8 +1,4 @@
 
 # Deception and Emotional Intelligence
 
-## To do list
-
-- Hypothesis testing
-  - EI and trait empathy are associated with criteria to support detection
-  
+This repository contains the code to wrangle and analyze the data from a study in the relationship between emotional intelligence and deception detection.
