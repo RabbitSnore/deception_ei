@@ -97,7 +97,7 @@ model_ei <- glmer(accuracy ~ veracity
 
 ### Compare models
 
-lrt_tests <- anova(model_base, model_emp, model_ei)
+lrt_accuracy <- anova(model_base, model_emp, model_ei)
 
 ### Preferred model
 
@@ -217,4 +217,35 @@ model_ei_tot <- glmer(accuracy ~ veracity + ttg_st
 
 # HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence -------
 
+## Base model
 
+model_conf_base <- glmer(accuracy ~ veracity + confidence + (1 + veracity|ss) + (1|sender), 
+                    data = model_data, 
+                    family = binomial(link = "logit")
+                    )
+
+## Add emotional intelligence
+
+model_conf_ei <- glmer(accuracy ~ veracity + confidence
+                       + r1g_st
+                       + (1 + veracity|ss) + (1|sender),
+                       data = model_data, 
+                       family = binomial(link = "logit")
+                       )
+
+# The Perceiving subscale seems to be the best candidate for possibly interacting with confidence.
+
+## Add interaction
+
+model_conf_ei_int <- glmer(accuracy ~ veracity 
+                           + confidence*r1g_st
+                           + (1 + veracity|ss) + (1|sender),
+                           data = model_data, 
+                           family = binomial(link = "logit")
+                           )
+
+## Model comparison
+
+lrt_confidence <- anova(model_conf_base, model_conf_ei, model_conf_ei_int)
+
+# This simply replicates the effect for Perceiving, but there is no evidence of an interaction with confidence

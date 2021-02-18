@@ -119,7 +119,7 @@ model_ei_sdt <- lm(dprime ~ iri_pt + iri_ec + iri_fs + iri_pd
 
 ### Model comparison
 
-anova(model_sdt_emp, model_ei_sdt)
+lrt_sdt_dprime <- anova(model_sdt_emp, model_ei_sdt)
 
 ## c (bias)
 
@@ -136,5 +136,5 @@ model_ei_c_sdt <- lm(c ~ iri_pt + iri_ec + iri_fs + iri_pd
 
 ### Model comparison
 
-anova(model_sdt_c_emp, model_ei_c_sdt)
+lrt_sdt_bias <- anova(model_sdt_c_emp, model_ei_c_sdt)
 
