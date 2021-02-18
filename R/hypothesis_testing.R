@@ -217,6 +217,8 @@ model_ei_tot <- glmer(accuracy ~ veracity + ttg_st
 
 # HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence -------
 
+## Does emotional intelligence make confidence (more) predictive of accuracy?
+
 ## Base model
 
 model_conf_base <- glmer(accuracy ~ veracity + confidence + (1 + veracity|ss) + (1|sender), 
@@ -249,3 +251,7 @@ model_conf_ei_int <- glmer(accuracy ~ veracity
 lrt_confidence <- anova(model_conf_base, model_conf_ei, model_conf_ei_int)
 
 # This simply replicates the effect for Perceiving, but there is no evidence of an interaction with confidence
+
+# HYPOTHESIS 3: Emotional intelligence and criteria for judgment ----------------
+
+
