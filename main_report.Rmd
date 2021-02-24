@@ -92,6 +92,36 @@ Below is a similar plot illustrating how mean predicted accuracy varies as a fun
 predict_plot_pt
 ```
 
+## Signal Detection Theory approach
+
+From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, I calculated signal detection indices for each receiver. Specifically, I examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, I fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. I compared the models using an F-test, to select a preferred model.
+
+For d-prime, the model comparison suggested that the model adding the EI subscales significantly improved the fit.
+
+```{r}
+lrt_sdt_dprime
+```
+
+This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same patter of significant coefficients, in the same directions.
+
+These results address some of the concerns I raised in my review -- specifically that the results might be due to a change in bias rather than a change in discrimination.
+
+```{r}
+summary(model_ei_sdt)
+```
+
+Indeed, if we examine the models predicting bias (measured by c), we see that adding the EI measures does not improve the fit of the model, and the model that includes the empathy measures suggests no significant differences in bias. Moreover, the adjusted R-squared is negative, suggesting very poor fit with the data.
+
+```{r}
+lrt_sdt_bias
+```
+
+```{r}
+summary(model_sdt_c_emp)
+```
+
+In short, the signal detection approach supports the results from the raw accuracy models.
+
 # Hypothesis 2
 
 Next, I turned my attention to the question of whether emotional intelligence and trait empathy give receivers better accuracy-confidence calibration. This calibration can be represented as a coefficient for confidence predicting accuracy (at the judgment level), and an increase in calibration would be represented by an interaction term for confidence and either EI or empathy.
