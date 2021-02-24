@@ -6,7 +6,7 @@
 
 # Load packages 
 
-packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "psycho")
+packages <- c("dplyr", "tidyr", "psycho")
 
 lapply(packages, library, character.only = TRUE)
 

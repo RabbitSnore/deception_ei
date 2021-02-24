@@ -32,15 +32,27 @@ assumptions <- accuracy_long %>%
 
 #### Histograms
 
-predictor_hist <- 
-  ggplot(assumptions,
-         aes(
+predictor_hist_ei <- assumptions %>% 
+  filter(grepl(x = assumptions$variable, pattern = ".*_st")) %>% 
+  ggplot(aes(
            x = value
          )) +
   facet_wrap(~ variable,
              nrow = 4) +
   geom_histogram(
     bins = 20
+  ) +
+  theme_classic()
+
+predictor_hist_emp <- assumptions %>% 
+  filter(grepl(x = assumptions$variable, pattern = "iri_.*")) %>% 
+  ggplot(aes(
+    x = value
+  )) +
+  facet_wrap(~ variable,
+             nrow = 2) +
+  geom_histogram(
+    bins = 15
   ) +
   theme_classic()
 
@@ -101,7 +113,7 @@ lrt_accuracy <- anova(model_base, model_emp, model_ei)
 
 ### Preferred model
 
-#### Predicted accuracy
+#### Predicted accuracy from emotional intelligence
 
 predict_data <- model_data
 
@@ -156,6 +168,62 @@ predict_plot <-
   ) +
   theme_classic()
 
+#### Predicted accuracy from perspective taking
+
+predict_data_pt <- model_data
+
+pred_seq_pt <- seq(from = min(model_data$iri_pt), to = max(model_data$iri_pt), length.out = 100)
+
+predict_probabilities_pt <- lapply(pred_seq_pt, function(x) {
+  
+  predict_data_pt$iri_pt <- x
+  
+  predict(model_ei, newdata = predict_data_pt, type = "response")
+  
+}
+
+)
+
+prob_mean_pt  <- sapply(predict_probabilities_pt, mean)
+prob_upper_pt <- sapply(predict_probabilities_pt, quantile, probs = .95)
+prob_lower_pt <- sapply(predict_probabilities_pt, quantile, probs = .05)
+
+predict_plot_data_pt <- data.frame(pred_seq_pt, prob_mean_pt, prob_upper_pt, prob_lower_pt)
+
+predict_plot_pt <- 
+  ggplot(predict_plot_data_pt,
+         aes(
+           x = pred_seq_pt,
+           y = prob_mean_pt
+         )) +
+  geom_line(
+    size = 1
+  ) +
+  coord_cartesian(
+    ylim = c(0, 1)
+  ) +
+  geom_hline(
+    yintercept = .50,
+    linetype = "dashed"
+  ) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dotted"
+  ) +
+  scale_x_continuous(
+    breaks = seq(-1.5, 1.5, .5) + round(mean(accuracy_long$iri_pt)) - mean(accuracy_long$iri_pt),
+    labels = round((seq(-1.5, 1.5, .5) * 10) + mean(accuracy_long$iri_pt))
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, .1)
+  ) +
+  labs(
+    x = "Trait Empathy (Perspective Taking)",
+    y = "Mean Predicted Accuracy"
+  ) +
+  theme_classic()
+
+
 ### Robustness checks
 
 #### Removing empathy
@@ -176,6 +244,17 @@ model_ei_ver <- glmer(accuracy ~ r1g_st + r2g_st + r3g_st + r4g_st
                       family = binomial(link = "logit")
                       )
 # The effect for EI Perceiving persists when removing veracity
+
+#### Using only the Perspective taking empathy subscale
+
+model_emp_pt <- glmer(accuracy ~ veracity  
+                      + iri_pt 
+                      + (1 + veracity|ss) + (1|sender), 
+                      data = model_data, 
+                      family = binomial(link = "logit")
+)
+# The effect for Perspective taking persists with other variables removed
+
 
 #### Using only EI perceiving
 
@@ -219,6 +298,13 @@ model_ei_tot <- glmer(accuracy ~ veracity + ttg_st
 
 ## Does emotional intelligence make confidence (more) predictive of accuracy?
 
+## Preparing data
+
+model_data <- model_data %>% 
+  mutate(
+    confidence = scale(confidence, scale = FALSE)
+  )
+
 ## Base model
 
 model_conf_base <- glmer(accuracy ~ veracity + confidence + (1 + veracity|ss) + (1|sender), 
@@ -229,18 +315,18 @@ model_conf_base <- glmer(accuracy ~ veracity + confidence + (1 + veracity|ss) + 
 ## Add emotional intelligence
 
 model_conf_ei <- glmer(accuracy ~ veracity + confidence
-                       + r1g_st
+                       + r1g_st + iri_pt
                        + (1 + veracity|ss) + (1|sender),
                        data = model_data, 
                        family = binomial(link = "logit")
                        )
 
-# The Perceiving subscale seems to be the best candidate for possibly interacting with confidence, so I will use it here instead of trying every EI facet.
+# The Perceiving subscale and the Perspective Taking subscale seem to be the best candidates for possibly interacting with confidence, so I will use it here instead of trying every EI and empathy facet.
 
 ## Add interaction
 
 model_conf_ei_int <- glmer(accuracy ~ veracity 
-                           + confidence*r1g_st
+                           + confidence*r1g_st + confidence*iri_pt
                            + (1 + veracity|ss) + (1|sender),
                            data = model_data, 
                            family = binomial(link = "logit")

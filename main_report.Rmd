@@ -3,6 +3,9 @@ title: "Empathy, Emotional Intelligence, and Deception Detection -- Main Report"
 author: "Timothy J. Luke"
 date: "`r Sys.Date()`"
 output: html_document
+knit: (function(input_file, encoding) {
+    rmarkdown::render(input_file, encoding = encoding, output_dir = "./reports/")
+  })
 ---
 
 ```{r setup, include=FALSE}
@@ -17,10 +20,153 @@ source("./R/signal_detection.R")
 
 The author of this report (Timothy) reviewed a manuscript for _Applied Cognitive Psychology_, which was ultimately rejected for publication. In that review, I recommended several potential ways of improving the statistical analyses and the interpretations thereof. I signed the review. Some time after the manuscript was rejected, the main author contacted me and asked if I would like to reanalyze the data and implement some of the things I recommended. I said yes.
 
-This is the outcome.
+This report contains my reanalysis of the data.
+
+The report is constructed by calling a series of scripts containing the code to wrangle the data, fit the models, and draw the visualizations presented below.
+
+# Initial examination of the data
+
+## Distributions
+
+First, I examined the distributions of the variables that would be used as predictors in the models testing the hypotheses.
+
+Although the data distributions for the EI measure and trait empathy were certainly not normal, I don't see anything here that would make me very concerned about using it in a model.
+
+```{r}
+predictor_hist_ei
+```
+
+```{r}
+predictor_hist_emp
+```
+
+## Missing data
+
+Thankfully, there is very little missing data. Just `r acc_na` missing accuracy value and `r conf_na` confidence values.
+
+```{r}
+acc_na # accuracy
+conf_na # confidence
+```
 
 # Hypothesis 1
 
+To test the hypothesis that emotional intelligence and trait empathy predict higher deception detection accuracy, I fit a series of mixed effects logistic regression models. I then compared the models using likelihood ratio tests, to select a preferred model.
+
+I wrangled the data into long form, such that each row represented a judgment by a receiver. Here are the first 20 rows, to illustrate the data structure.
+
+```{r}
+head(model_data, 20) %>% 
+  knitr::kable()
+```
+
+In the first model, deception detection accuracy (0 = incorrect, 1 = correct) was regressed on the veracity condition of the message (truth vs. lie), with random intercepts for senders, as well as random slopes (for veracity) and intercepts for receivers. In the second model, the four trait empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors.
+
+Likelihood ratio tests indicated at best marginal improvement by the addition of the empathy measures, but there was significant improvement of fit with the addition of the emotional intellgience measures.
+
+```{r}
+lrt_accuracy
+```
+
+Thus, I retained the third model, which included both trait empathy and emotional intelligence. The main output of this model is provided below:
+
+```{r}
+summary(model_ei)
+```
+
+Interestingly but perhaps unsurprisingly, the variance in intercepts for senders massively exceeds the variance in intercepts for receivers. The sender variance exceeds the receiver variance by a factor of more than 124. As in Bond and DePaulo (2008), accuracy is primarily determined by the sender, rather than by the receiver.
+
+Examining the coefficients, it appears that the Perceiving subscale of emotional intelligence appears to positively predict deception detection accuracy. The Perspective Taking subscale of the trait empathy instrument also appears to predict increased accuracy, but the p-value is fairly high (i.e., it would likely not survive a reasonable correction for multiple comparisons). The Using subscale of EI appears to negatively predict accuracy, but again, the p-value is relatively high, and I am not confident that this would survive corrections for multiple comparisons. Moreover, the significance of this coefficient is not robust to alternative models (see the supplemental analyses below).
+
+To visualize the increase in accuracy apparently conferred by higher scores on the Perceiving EI subscale, I extracted the mean predicted accuracy rates from the preferred model at each level of the Perceiving subscale. The figure below illustrates the relationship between accuracy and the Perceiving subscale, with a horizontal line drawn at chance-level accuracy and a vertical line drawn at the sample mean on Perceiving.
+
+The increase in accuracy might be theoretically interesting, if this effect is trustworthy, but it is not particularly impressive from a practical perspective. People with the highest score on Perceiving are predicted to have a mean accuracy of `r paste(round(max(predict_plot_data$prob_mean) * 100, 1), "%", sep = "")`. Interestingly, in this sample, participants scoring near the mean on Perceiving are predicted to have approximately chance-level accuracy.
+
+```{r}
+predict_plot
+```
+
+Below is a similar plot illustrating how mean predicted accuracy varies as a function of the Perspective Taking subscale on the trait empathy measure. A participant with the highest Perspective Taking score in the sample is predicted to have a mean accuracy of `r paste(round(max(predict_plot_data_pt$prob_mean_pt) * 100, 1), "%", sep = "")`.
+
+```{r}
+predict_plot_pt
+```
+
 # Hypothesis 2
 
+Next, I turned my attention to the question of whether emotional intelligence and trait empathy give receivers better accuracy-confidence calibration. This calibration can be represented as a coefficient for confidence predicting accuracy (at the judgment level), and an increase in calibration would be represented by an interaction term for confidence and either EI or empathy.
+
+To investigate this question, I fit a series of mixed effects logistic regression models, similar to the ones above. In the initial model, confidence and veracity predicted accuracy. As can be seen below, in this initial model, there is no relationship between accuracy and confidence. The coefficient is very close to 0.
+
+```{r}
+summary(model_conf_base)
+```
+
+Based on the models testing Hypothesis 1, I regarded the Perceiving EI subscale and the Perspective Taking empathy subscale as the best candidates to interact with confidence. Thus, I fit models in which (1) those scales were added and (2) their interaction terms with confidence were added. I then compared these models to the base model using a likelihood ratio test, to select a model. The model comparison suggested a significant improvement of fit adding EI and empathy, but there was no improvement of fit with the addition of the interaction terms.
+
+```{r}
+lrt_confidence
+```
+
+Since the interaction terms did not improve the model fit, there does not appear to be any evidence that emotional intelligence and empathy improve confidence-accuracy calibration. In the selected model (output below), the Perceiving EI subscale significantly predicts accuracy as above, but the coefficient for Perspective Taking is no longer significant. These results reduce my confidence that Perspective Taking really predicts accuracy.
+
+```{r}
+summary(model_conf_ei)
+```
+
 # Hypothesis 3
+
+# Additional materials
+
+## Discarded models for Hypothesis 1
+
+The initial model, with only veracity as a predictor.
+
+```{r}
+summary(model_base)
+```
+
+The model adding the trait empathy measures.
+
+```{r}
+summary(model_emp)
+```
+
+## Discarded models for Hypothesis 2
+
+Adding the interaction terms did not improve the fit of the model.
+
+```{r}
+summary(model_conf_ei_int)
+```
+
+## Robustness checks for Hypothesis 1
+
+The effect for EI Perceiving persists when removing the empathy variables.
+
+```{r}
+summary(model_ei_red)
+```
+
+The coefficient for EI Perceiving remains significant when removing other predictors.
+
+```{r}
+summary(model_ei_per)
+```
+The negative coefficient for EI Using becomes nonsignificant when other predictors are removed.
+
+```{r}
+summary(model_ei_use)
+```
+
+Additionally, EI total scores and EI bifactor scores do not predict accuracy.
+
+```{r}
+summary(model_ei_sub)
+```
+
+```{r}
+summary(model_ei_tot)
+```
+
+
