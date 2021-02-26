@@ -2,7 +2,10 @@
 title: "Empathy, Emotional Intelligence, and Deception Detection -- Main Report"
 author: "Timothy J. Luke"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 knit: (function(input_file, encoding) {
     rmarkdown::render(input_file, encoding = encoding, output_dir = "./reports/")
   })
@@ -145,6 +148,60 @@ summary(model_conf_ei)
 ```
 
 # Hypothesis 3
+
+The third research question concerned whether emotional intelligence and trait empathy predicted the judgment critiera provided by the receivers. Receivers' listed critiera were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
+
+For each of these categories, I fit and compared a series of linear mixed effects models. In the first model, the number of criteria listed was predicted by veracity, with random intercepts and slopes for each receiver and random intercepts for each sender. In the second model, the four empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors. I compared each of these models using likelihood ratio tests to find a preferred model.
+
+## Cognitive Complexity
+
+The model selection procedure suggested that neither empathy nor EI predicted receivers reporting cognitive complexity criteria.
+
+```{r}
+cognitive_models[[4]]
+```
+
+```{r}
+summary(cognitive_models[[1]])
+```
+
+## Emotional Features
+
+The model selection procedure for emotional features suggested that the addition of the empathy subscales improved fit, but the addition of the emotional intelligence subscales did not.
+
+```{r}
+emotion_models[[4]]
+```
+
+The IRI Fantasy subscale significantly predicts receivers reporting emotional features as judgment criteria. The effect is relatively small, however. A change of 1 point on the Fantasy subscale corresponds to a predicted increase of reporting `r round(summary(emotion_models[[2]])$coefficients[5, 1], 3)` of an emotional feature criterion.
+
+```{r}
+summary(emotion_models[[2]])
+```
+
+## Expressive Indices
+
+The model selection procedure suggested that neither empathy nor EI predicted receivers reporting expressive indices.
+
+```{r}
+expressive_models[[4]]
+```
+
+```{r}
+summary(expressive_models[[1]])
+```
+
+## Paraverbal Aspects
+
+The model selection procedure suggested that neither empathy nor EI predicted receivers reporting paraverbal aspects.
+
+```{r}
+paraverbal_models[[4]]
+```
+
+```{r}
+summary(paraverbal_models[[1]])
+```
 
 # Additional materials
 
