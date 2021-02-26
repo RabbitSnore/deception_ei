@@ -58,6 +58,8 @@ To test the hypothesis that emotional intelligence and trait empathy predict hig
 
 I wrangled the data into long form, such that each row represented a judgment by a receiver. Here are the first 20 rows, to illustrate the data structure.
 
+Note that for the data used to test Hypothesis 1 and 2, I divided the emotional intelligence subscales and empathy subscales by 10 and mean centered them. These transformations were done to troubleshoot nearly unidentifiable models. The transformations should have no impact on the substantive interpretation of the models. To convert coefficients related to these variables back to the original scale, simply multiply them by 10.
+
 ```{r}
 head(model_data, 20) %>% 
   knitr::kable()
