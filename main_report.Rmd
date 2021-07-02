@@ -43,6 +43,12 @@ predictor_hist_ei
 predictor_hist_emp
 ```
 
+## Correlations between predictors
+
+```{r}
+h1_predictor_cor
+```
+
 ## Missing data
 
 Thankfully, there is very little missing data. Just `r acc_na` missing accuracy value and `r conf_na` confidence values.
