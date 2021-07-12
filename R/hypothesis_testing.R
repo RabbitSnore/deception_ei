@@ -6,7 +6,7 @@
 
 # Load packages 
 
-packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "lme4", "lmerTest")
+packages <- c("dplyr", "tidyr", "readxl", "ggplot2", "lme4", "lmerTest", "cowplot")
 
 lapply(packages, library, character.only = TRUE)
 
@@ -168,6 +168,9 @@ predict_plot <-
   ) +
   theme_classic()
 
+save_plot("./plots/predict_plot_ei.png", predict_plot, base_asp = 1, base_height = 4)
+save_plot("./plots/predict_plot_ei.tiff", predict_plot, base_asp = 1, base_height = 4)
+
 #### Predicted accuracy from perspective taking
 
 predict_data_pt <- model_data
@@ -223,6 +226,40 @@ predict_plot_pt <-
   ) +
   theme_classic()
 
+save_plot("./plots/predict_plot_emp.png", predict_plot_pt, base_asp = 1, base_height = 4)
+save_plot("./plots/predict_plot_emp.tiff", predict_plot_pt, base_asp = 1, base_height = 4)
+
+### Sender and receiver intercepts 
+
+model_intercepts <- glmer(accuracy ~ (1|ss) + (1|sender), 
+                          data = model_data, 
+                          family = binomial(link = "logit")
+)
+
+sender_intercepts <- coef(model_intercepts)$sender[, 1] %>% exp() / (1 + coef(model_intercepts)$sender[, 1] %>% exp())
+
+sender_int_range <- range(sender_intercepts)
+sender_int_mean  <- mean(sender_intercepts)
+sender_int_sd    <- sd(sender_intercepts)
+
+receiver_intercepts <- coef(model_intercepts)$ss[, 1] %>% exp() / (1 + coef(model_intercepts)$ss[, 1] %>% exp())
+
+receiver_int_range <- range(receiver_intercepts)
+receiver_int_mean  <- mean(receiver_intercepts)
+receiver_int_sd    <- sd(receiver_intercepts)
+
+### Does the effect of Perceiving and Perspective taking vary across senders?
+
+model_ei_sender_slopes <- 
+  glmer(accuracy ~ veracity 
+        + iri_pt + iri_ec + iri_fs + iri_pd 
+        + r1g_st + r2g_st + r3g_st + r4g_st 
+        + (1 + veracity|ss) + (1 + iri_pt + r1g_st|sender), 
+        data = model_data, 
+        family = binomial(link = "logit")
+  )
+
+sender_slope_lrt <- anova(model_ei, model_ei_sender_slopes)
 
 ### Robustness checks
 

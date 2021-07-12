@@ -103,6 +103,49 @@ Below is a similar plot illustrating how mean predicted accuracy varies as a fun
 predict_plot_pt
 ```
 
+### Exploration of Sender Intercepts
+
+The random intercept variance for senders was quite large. Thus, it may be worthwhile to describe that variance in more detail.
+
+To examine this variation, I fit a logistic regression model predicting accuracy only using random intercepts for senders and receivers.There were 14 sender videos used in this experiment, and their estimated average accuracy rates (derived by converting the random intercepts into the response scale) are as follows:
+
+```{r}
+sender_intercepts
+```
+
+```{r}
+sender_int_range
+sender_int_mean
+sender_int_sd
+```
+
+The intercepts for receivers are as follows:
+
+```{r}
+receiver_intercepts
+```
+```{r}
+receiver_int_range
+receiver_int_mean 
+receiver_int_sd   
+```
+
+It is easy to see there is a great deal more variability in senders than in receivers.
+
+### Do the Effects of Perceiving and Perspective Taking Vary Across Senders?
+
+It is reasonable to ask whether the Perceiving subscale and the Perspective Taking subscale had differential effects across senders, given that there is so much variability in senders. Such differences can be modeled as random slopes for Perceiving and Perspective Taking for senders. These random slopes represent variation in the extent to which Perceiving and Perspective Taking render some senders more transparent. These slopes should vary considerably if, for example, senders varied substantively in the extent to which there were "hidden" emotional information in their messages, such that the detection of such emotional information (facilitated by Perceiving or Perspective Taking) would assist a receiver in accurately judging the message.
+
+```{r}
+sender_slope_lrt
+```
+
+```{r}
+summary(model_ei_sender_slopes)
+```
+
+We see here there is virtually no variation in these random slopes. This lack of variation does not help clarify the mechanism by which Perceiving and Perspective Taking increase judgment accuracy. In fact, it raises more questions than it answers.
+
 ## Signal Detection Theory approach
 
 From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, I calculated signal detection indices for each receiver. Specifically, I examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, I fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. I compared the models using an F-test, to select a preferred model.
