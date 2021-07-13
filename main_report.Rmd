@@ -103,9 +103,9 @@ Below is a similar plot illustrating how mean predicted accuracy varies as a fun
 predict_plot_pt
 ```
 
-### Exploration of Sender Intercepts
+## Exploration of Sender and Receiver Intercepts
 
-The random intercept variance for senders was quite large. Thus, it may be worthwhile to describe that variance in more detail.
+The random intercept variance for senders was quite large, and the variance for receivers was quite small. Thus, it may be worthwhile to describe that variance in more detail.
 
 To examine this variation, I fit a logistic regression model predicting accuracy only using random intercepts for senders and receivers.There were 14 sender videos used in this experiment, and their estimated average accuracy rates (derived by converting the random intercepts into the response scale) are as follows:
 
@@ -132,7 +132,7 @@ receiver_int_sd
 
 It is easy to see there is a great deal more variability in senders than in receivers.
 
-### Do the Effects of Perceiving and Perspective Taking Vary Across Senders?
+## Do the Effects of Perceiving and Perspective Taking Vary Across Senders?
 
 It is reasonable to ask whether the Perceiving subscale and the Perspective Taking subscale had differential effects across senders, given that there is so much variability in senders. Such differences can be modeled as random slopes for Perceiving and Perspective Taking for senders. These random slopes represent variation in the extent to which Perceiving and Perspective Taking render some senders more transparent. These slopes should vary considerably if, for example, senders varied substantively in the extent to which there were "hidden" emotional information in their messages, such that the detection of such emotional information (facilitated by Perceiving or Perspective Taking) would assist a receiver in accurately judging the message.
 

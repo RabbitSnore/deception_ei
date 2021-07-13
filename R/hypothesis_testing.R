@@ -377,6 +377,13 @@ lrt_confidence <- anova(model_conf_base, model_conf_ei, model_conf_ei_int)
 
 # HYPOTHESIS 3: Emotional intelligence and criteria for judgment ----------------
 
+## Set up variables
+
+cog_long$veracity        <- factor(cog_long$veracity, levels = c("truth", "liar"))
+emotion_long$veracity    <- factor(emotion_long$veracity, levels = c("truth", "liar"))
+expressive_long$veracity <- factor(expressive_long$veracity, levels = c("truth", "liar"))
+paraverbal_long$veracity <- factor(paraverbal_long$veracity, levels = c("truth", "liar"))
+
 ## Function for criteria model fitting
 
 criteria_model <- function(data) {
