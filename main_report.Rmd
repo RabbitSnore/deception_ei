@@ -73,7 +73,7 @@ head(model_data, 20) %>%
 
 In the first model, deception detection accuracy (0 = incorrect, 1 = correct) was regressed on the veracity condition of the message (truth vs. lie), with random intercepts for senders, as well as random slopes (for veracity) and intercepts for receivers. In the second model, the four trait empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors.
 
-Likelihood ratio tests indicated at best marginal improvement by the addition of the empathy measures, but there was significant improvement of fit with the addition of the emotional intellgience measures.
+Likelihood ratio tests indicated at best marginal improvement by the addition of the empathy measures, but there was significant improvement of fit with the addition of the emotional intelligence measures.
 
 ```{r}
 lrt_accuracy

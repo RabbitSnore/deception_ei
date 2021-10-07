@@ -43,5 +43,4 @@ vignettes/*.pdf
 # Raw files
 ACP-20-0188_Proof_hi.pdf
 *.Rproj
-deception_ei_data.xlsx
 deception_ei_codebook.csv
