@@ -428,3 +428,29 @@ paraverbal_models <- criteria_model(data = paraverbal_long)
 # Emotion model seems to benefit from the addition of empathy but not EI. The IRI Fantasy subscale seems to be significant.
 # The expressive models do not seem to benefit from empathy or EI.
 # Neither do the paraverbal models
+
+# Exploratory analyses ---------------------------------------------------------
+
+## Gender differences 
+
+# A reviewer requested an analysis of gender differences. There are many ways of
+# approaching the question of whether accuracy varies as a function of gender.
+# Here, we take the approach of fitting a simple model using only gender and
+# veracity as fixed effects, with the same random effects structure as above,
+# followed by a model that uses all the EI and empathy predictors as well.
+
+gender_mod_1 <- glmer(accuracy ~ veracity 
+                      + sex + (1 + veracity|ss) + (1|sender),
+                      data = model_data, 
+                      family = binomial(link = "logit")
+                      )
+
+gender_mod_2 <- glmer(accuracy ~ veracity
+                      + iri_pt + iri_ec + iri_fs + iri_pd 
+                      + r1g_st + r2g_st + r3g_st + r4g_st
+                      + sex + (1 + veracity|ss) + (1|sender),
+                      data = model_data, 
+                      family = binomial(link = "logit")
+)
+
+

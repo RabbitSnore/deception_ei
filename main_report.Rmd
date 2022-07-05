@@ -6,6 +6,7 @@ output:
   html_document:
     toc: true
     toc_float: true
+    keep_md: true
 knit: (function(input_file, encoding) {
     rmarkdown::render(input_file, encoding = encoding, output_dir = "./reports/")
   })
@@ -23,7 +24,7 @@ source("./R/signal_detection.R")
 
 The author of this report (Timothy) reviewed a manuscript for _Applied Cognitive Psychology_, which was ultimately rejected for publication. In that review, I recommended several potential ways of improving the statistical analyses and the interpretations thereof. I signed the review. Some time after the manuscript was rejected, the main author contacted me and asked if I would like to reanalyze the data and implement some of the things I recommended. I said yes.
 
-This report contains my reanalysis of the data.
+This report contains my reanalysis of the data, as well as expansions of my initial reanalysis, in response to reviewer comments.
 
 The report is constructed by calling a series of scripts containing the code to wrangle the data, fit the models, and draw the visualizations presented below.
 
@@ -306,5 +307,63 @@ summary(model_ei_sub)
 ```{r}
 summary(model_ei_tot)
 ```
+
+# Exploratory analyses
+
+A reviewer requested an analysis of gender differences. 
+
+Descriptively, it does seem as though women tend to score slightly higher on the
+EI and empathy measures than men, but these tendences are quite small. For the
+empathy measures, three out of the four differences between men and women were 
+statistically significant, for what it is worth.
+
+```{r, echo = FALSE}
+emotion %>% 
+    group_by(sex) %>% 
+    summarise(
+        mean_pt = mean(iri_pt, na.rm = TRUE),
+        sd_pt   = sd(iri_pt, na.rm = TRUE),
+        mean_ec = mean(iri_ec, na.rm = TRUE),
+        sd_ec   = sd(iri_ec, na.rm = TRUE),
+        mean_fs = mean(iri_fs, na.rm = TRUE),
+        sd_fs   = sd(iri_fs, na.rm = TRUE),
+        mean_pd = mean(iri_pd, na.rm = TRUE),
+        sd_pd   = sd(iri_pd, na.rm = TRUE)
+    )
+```
+
+```{r}
+emotion %>% 
+    group_by(sex) %>% 
+    summarise(
+        mean_r1g = mean(r1g_st, na.rm = TRUE),
+        sd_r1g   = sd(r1g_st, na.rm = TRUE),
+        mean_r2g = mean(r2g_st, na.rm = TRUE),
+        sd_r2g   = sd(r2g_st, na.rm = TRUE),
+        mean_r3g = mean(r3g_st, na.rm = TRUE),
+        sd_r3g   = sd(r3g_st, na.rm = TRUE),
+        mean_r4g = mean(r4g_st, na.rm = TRUE),
+        sd_r4g   = sd(r4g_st, na.rm = TRUE)
+    )
+```
+
+There are many ways of approaching the question of whether accuracy varies as a 
+function of gender. Here, we take the approach of fitting a simple model using 
+only gender and veracity as fixed effects, with the same random effects 
+structure as above, followed by a model that uses all the EI and empathy 
+predictors as well.
+
+```{r}
+summary(gender_mod_1)
+```
+
+```{r}
+summary(gender_mod_2)
+```
+
+As can be seen in these results, neither model supports the notiion of gender
+differences in accuracy.
+
+
 
 

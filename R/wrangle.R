@@ -23,7 +23,7 @@ colnames(raw) <- tolower(colnames(raw))
 ## Select accuracy columns
 
 accuracy <- raw %>% 
-  select(ss, starts_with("accur_"))
+  select(ss, sex, starts_with("accur_"))
 
 accuracy_long <- accuracy %>% 
   pivot_longer(
@@ -88,7 +88,7 @@ cog_long <- cog_complex %>%
 ## Emotional features
 
 emotion <- raw %>% 
-  select(ss, starts_with("ef_")) %>% 
+  select(ss, sex, starts_with("ef_")) %>% 
   left_join(ei_data, by = "ss")
 
 emotion_long <- emotion %>% 
