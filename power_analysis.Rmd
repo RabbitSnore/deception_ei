@@ -1,0 +1,56 @@
+---
+title: "Empathy, Emotional Intelligence, and Deception Detection -- Supplemental Report on Statistical Power"
+author: "Timothy J. Luke"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    keep_md: true
+knit: (function(input_file, encoding) {
+    rmarkdown::render(input_file, encoding = encoding, output_dir = "./reports/")
+  })
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(simr)
+```
+
+Power analysis for mixed effects models poses many difficulties, but it is
+possible to assess the power of the present study using a simulation-based
+approach. Using the simr package (Green & MacLeod, 2016) for R 
+(R Core Team, 2022), we extracted the fixed and random effects estimates from 
+the fitted model, and we altered the fixed effects to test a range of effects. 
+Given that any effects of individual difference measures on deception detection 
+accuracy and calibration are likely to be quite small, we assessed power for 
+effects equivalent to d = 0.10, 0.15, 0.20, and 0.25 (log odds ratio = 0.18, 
+0.27, 0.36, and 0.45). Each of the four estimates was based on 1,000 
+simulations. These simulations suggested that the present design provided 30.20%
+power for d = 0.10, 54.00% for d = 0.15, 82.40% for d = 0.20, and 95.00% for d =
+0.25. Thus, the present design provided a reasonable degree of statistical power
+for relatively small effects (e.g., d = 0.20, 0.25), but we had inadequate power
+to detect the smallest of effects. However, the effects for which the design was
+inadequately powered may be so small as to be of minimal theoretical interest in 
+any case. In sum, the present data have a reasonable amount of informational 
+value.
+
+Below are the results of the simulations. Effect sizes are provided in log odds
+ratios.
+
+```{r, echo = FALSE}
+load("sim_outcome_010.rda")
+simulated_power
+load("sim_outcome_015.rda")
+simulated_power
+load("sim_outcome_020.rda")
+simulated_power
+load("sim_outcome_025.rda")
+simulated_power
+```
+
+For the code used to produce these simulations, see `power_simulation_010.R`, 
+`power_simulation_015.R`, `power_simulation_020.R`, and 
+`power_simulation_025.R^`. The code in each of these scripts is nearly identical
+with the exception of the specification of the effect size. If you
+want to reproduce these simulations, note that they are quite computationally
+intensive. On the author's personal computer, the simulations took more than two
+hours each. Some took nearly three hours.
