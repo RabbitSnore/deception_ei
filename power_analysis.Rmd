@@ -37,13 +37,13 @@ Below are the results of the simulations. Effect sizes are provided in log odds
 ratios.
 
 ```{r, echo = FALSE}
-load("./cache/sim_outcome_010.rda")
+load("./stored/sim_outcome_010.rda")
 simulated_power
-load("./cache/sim_outcome_015.rda")
+load("./stored/sim_outcome_015.rda")
 simulated_power
-load("./cache/sim_outcome_020.rda")
+load("./stored/sim_outcome_020.rda")
 simulated_power
-load("./cache/sim_outcome_025.rda")
+load("./stored/sim_outcome_025.rda")
 simulated_power
 ```
 
