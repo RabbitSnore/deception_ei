@@ -1,7 +1,7 @@
 ---
 title: "Empathy, Emotional Intelligence, and Deception Detection -- Main Report"
 author: "Timothy J. Luke"
-date: "2022-07-05"
+date: "2022-07-12"
 output: 
   html_document:
     toc: true
@@ -16,7 +16,7 @@ knit: (function(input_file, encoding) {
 
 # Background
 
-The author of this report (Timothy) reviewed a manuscript for _Applied Cognitive Psychology_, which was ultimately rejected for publication. In that review, I recommended several potential ways of improving the statistical analyses and the interpretations thereof. I signed the review. Some time after the manuscript was rejected, the main author contacted me and asked if I would like to reanalyze the data and implement some of the things I recommended. I said yes.
+The main author of this report (Timothy) reviewed a manuscript for _Applied Cognitive Psychology_, which was ultimately rejected for publication. In that review, I recommended several potential ways of improving the statistical analyses and the interpretations thereof. I signed the review. Some time after the manuscript was rejected, the main author contacted me and asked if I would like to reanalyze the data and implement some of the things I recommended. I said yes.
 
 This report contains my reanalysis of the data, as well as expansions of my initial reanalysis, in response to reviewer comments.
 
@@ -26,9 +26,9 @@ The report is constructed by calling a series of scripts containing the code to 
 
 ## Distributions
 
-First, I examined the distributions of the variables that would be used as predictors in the models testing the hypotheses.
+First, we examined the distributions of the variables that would be used as predictors in the models testing the hypotheses.
 
-Although the data distributions for the EI measure and trait empathy were certainly not normal, I don't see anything here that would make me very concerned about using it in a model.
+Although the data distributions for the EI measure and trait empathy were certainly not normal, we don't see anything here that would make me very concerned about using it in a model.
 
 
 ```r
@@ -101,9 +101,9 @@ conf_na # confidence
 
 # Hypothesis 1
 
-To test the hypothesis that emotional intelligence and trait empathy predict higher deception detection accuracy, I fit a series of mixed effects logistic regression models. I then compared the models using likelihood ratio tests, to select a preferred model.
+To test the hypothesis that emotional intelligence and trait empathy predict higher deception detection accuracy, we fit a series of mixed effects logistic regression models. we then compared the models using likelihood ratio tests, to select a preferred model.
 
-I wrangled the data into long form, such that each row represented a judgment by a receiver. Here are the first 20 rows, to illustrate the data structure.
+We wrangled the data into long form, such that each row represented a judgment by a receiver. Here are the first 20 rows, to illustrate the data structure.
 
 Note that for the data used to test Hypothesis 1 and 2, I divided the emotional intelligence subscales and empathy subscales by 10 and mean centered them. These transformations were done to troubleshoot nearly unidentifiable models. The transformations should have no impact on the substantive interpretation of the models. To convert coefficients related to these variables back to the original scale, simply divide them by 10.
 
@@ -161,7 +161,7 @@ lrt_accuracy
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Thus, I retained the third model, which included both trait empathy and emotional intelligence. The main output of this model is provided below:
+Thus, we retained the third model, which included both trait empathy and emotional intelligence. The main output of this model is provided below:
 
 
 ```r
@@ -222,9 +222,9 @@ summary(model_ei)
 
 Interestingly but perhaps unsurprisingly, the variance in intercepts for senders massively exceeds the variance in intercepts for receivers. The sender variance exceeds the receiver variance by a factor of more than 124. As in Bond and DePaulo (2008), accuracy is primarily determined by the sender, rather than by the receiver.
 
-Examining the coefficients, it appears that the Perceiving subscale of emotional intelligence appears to positively predict deception detection accuracy. The Perspective Taking subscale of the trait empathy instrument also appears to predict increased accuracy, but the p-value is fairly high (i.e., it would likely not survive a reasonable correction for multiple comparisons). The Using subscale of EI appears to negatively predict accuracy, but again, the p-value is relatively high, and I am not confident that this would survive corrections for multiple comparisons. Moreover, the significance of this coefficient is not robust to alternative models (see the supplemental analyses below).
+Examining the coefficients, it appears that the Perceiving subscale of emotional intelligence appears to positively predict deception detection accuracy. The Perspective Taking subscale of the trait empathy instrument also appears to predict increased accuracy, but the p-value is fairly high (i.e., it would likely not survive a reasonable correction for multiple comparisons). The Using subscale of EI appears to negatively predict accuracy, but again, the p-value is relatively high, and we are not confident that this would survive corrections for multiple comparisons. Moreover, the significance of this coefficient is not robust to alternative models (see the supplemental analyses below).
 
-To visualize the increase in accuracy apparently conferred by higher scores on the Perceiving EI subscale, I extracted the mean predicted accuracy rates from the preferred model at each level of the Perceiving subscale. The figure below illustrates the relationship between accuracy and the Perceiving subscale, with a horizontal line drawn at chance-level accuracy and a vertical line drawn at the sample mean on Perceiving.
+To visualize the increase in accuracy apparently conferred by higher scores on the Perceiving EI subscale, we extracted the mean predicted accuracy rates from the preferred model at each level of the Perceiving subscale. The figure below illustrates the relationship between accuracy and the Perceiving subscale, with a horizontal line drawn at chance-level accuracy and a vertical line drawn at the sample mean on Perceiving.
 
 The increase in accuracy might be theoretically interesting, if this effect is trustworthy, but it is not particularly impressive from a practical perspective. People with the highest score on Perceiving are predicted to have a mean accuracy of 55.7%. Interestingly, in this sample, participants scoring near the mean on Perceiving are predicted to have approximately chance-level accuracy.
 
@@ -248,7 +248,7 @@ predict_plot_pt
 
 The random intercept variance for senders was quite large, and the variance for receivers was quite small. Thus, it may be worthwhile to describe that variance in more detail.
 
-To examine this variation, I fit a logistic regression model predicting accuracy only using random intercepts for senders and receivers.There were 14 sender videos used in this experiment, and their estimated average accuracy rates (derived by converting the random intercepts into the response scale) are as follows:
+To examine this variation, we fit a logistic regression model predicting accuracy only using random intercepts for senders and receivers.There were 14 sender videos used in this experiment, and their estimated average accuracy rates (derived by converting the random intercepts into the response scale) are as follows:
 
 
 ```r
@@ -426,7 +426,7 @@ We see here there is virtually no variation in these random slopes. This lack of
 
 ## Signal Detection Theory approach
 
-From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, I calculated signal detection indices for each receiver. Specifically, I examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, I fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. I compared the models using an F-test, to select a preferred model.
+From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, we calculated signal detection indices for each receiver. Specifically, we examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, we fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. we compared the models using an F-test, to select a preferred model.
 
 For d-prime, the model comparison suggested that the model adding the EI subscales significantly improved the fit.
 
@@ -450,7 +450,7 @@ lrt_sdt_dprime
 
 This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same patter of significant coefficients, in the same directions.
 
-These results address some of the concerns I raised in my review -- specifically that the results might be due to a change in bias rather than a change in discrimination.
+These results address some of the concerns raised in Timothy's review -- specifically that the results might be due to a change in bias rather than a change in discrimination.
 
 
 ```r
@@ -535,9 +535,9 @@ In short, the signal detection approach supports the results from the raw accura
 
 # Hypothesis 2
 
-Next, I turned my attention to the question of whether emotional intelligence and trait empathy give receivers better accuracy-confidence calibration. This calibration can be represented as a coefficient for confidence predicting accuracy (at the judgment level), and an increase in calibration would be represented by an interaction term for confidence and either EI or empathy.
+Next, we turned our attention to the question of whether emotional intelligence and trait empathy give receivers better accuracy-confidence calibration. This calibration can be represented as a coefficient for confidence predicting accuracy (at the judgment level), and an increase in calibration would be represented by an interaction term for confidence and either EI or empathy.
 
-To investigate this question, I fit a series of mixed effects logistic regression models, similar to the ones above. In the initial model, confidence and veracity predicted accuracy. As can be seen below, in this initial model, there is no relationship between accuracy and confidence. The coefficient is very close to 0.
+To investigate this question, we fit a series of mixed effects logistic regression models, similar to the ones above. In the initial model, confidence and veracity predicted accuracy. As can be seen below, in this initial model, there is no relationship between accuracy and confidence. The coefficient is very close to 0.
 
 
 ```r
@@ -578,7 +578,7 @@ summary(model_conf_base)
 ## confidence   0.008 -0.009
 ```
 
-Based on the models testing Hypothesis 1, I regarded the Perceiving EI subscale and the Perspective Taking empathy subscale as the best candidates to interact with confidence. Thus, I fit models in which (1) those scales were added and (2) their interaction terms with confidence were added. I then compared these models to the base model using a likelihood ratio test, to select a model. The model comparison suggested a significant improvement of fit adding EI and empathy, but there was no improvement of fit with the addition of the interaction terms.
+Based on the models testing Hypothesis 1, we regarded the Perceiving EI subscale and the Perspective Taking empathy subscale as the best candidates to interact with confidence. Thus, we fit models in which (1) those scales were added and (2) their interaction terms with confidence were added. I then compared these models to the base model using a likelihood ratio test, to select a model. The model comparison suggested a significant improvement of fit adding EI and empathy, but there was no improvement of fit with the addition of the interaction terms.
 
 
 ```r
@@ -599,7 +599,7 @@ lrt_confidence
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Since the interaction terms did not improve the model fit, there does not appear to be any evidence that emotional intelligence and empathy improve confidence-accuracy calibration. In the selected model (output below), the Perceiving EI subscale significantly predicts accuracy as above, but the coefficient for Perspective Taking is no longer significant. These results reduce my confidence that Perspective Taking really predicts accuracy.
+Since the interaction terms did not improve the model fit, there does not appear to be any evidence that emotional intelligence and empathy improve confidence-accuracy calibration. In the selected model (output below), the Perceiving EI subscale significantly predicts accuracy as above, but the coefficient for Perspective Taking is no longer significant. These results reduce our confidence that Perspective Taking really predicts accuracy.
 
 
 ```r
@@ -652,7 +652,7 @@ summary(model_conf_ei)
 
 The third research question concerned whether emotional intelligence and trait empathy predicted the judgment critiera provided by the receivers. Receivers' listed critiera were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
 
-For each of these categories, I fit and compared a series of linear mixed effects models. In the first model, the number of criteria listed was predicted by veracity, with random intercepts and slopes for each receiver and random intercepts for each sender. In the second model, the four empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors. I compared each of these models using likelihood ratio tests to find a preferred model.
+For each of these categories, we fit and compared a series of linear mixed effects models. In the first model, the number of criteria listed was predicted by veracity, with random intercepts and slopes for each receiver and random intercepts for each sender. In the second model, the four empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors. We compared each of these models using likelihood ratio tests to find a preferred model.
 
 ## Cognitive Complexity
 
