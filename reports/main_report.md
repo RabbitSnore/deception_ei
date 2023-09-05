@@ -1,7 +1,7 @@
 ---
 title: "Empathy, Emotional Intelligence, and Deception Detection -- Main Report"
 author: "Timothy J. Luke"
-date: "2022-07-12"
+date: "2023-09-05"
 output: 
   html_document:
     toc: true
@@ -35,14 +35,14 @@ Although the data distributions for the EI measure and trait empathy were certai
 predictor_hist_ei
 ```
 
-![](C:/Users/RabbitSnore/Documents/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+![](C:/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
 
 
 ```r
 predictor_hist_emp
 ```
 
-![](C:/Users/RabbitSnore/Documents/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](C:/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ## Correlations between predictors
 
@@ -181,27 +181,27 @@ summary(model_ei)
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -2.3704 -0.8623 -0.4374  0.8883  2.5287 
+## -2.3703 -0.8623 -0.4374  0.8883  2.5287 
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr 
-##  ss     (Intercept)  0.004198 0.0648        
-##         veracityliar 0.056953 0.2386   -1.00
-##  sender (Intercept)  0.523570 0.7236        
+##  ss     (Intercept)  0.004196 0.06477       
+##         veracityliar 0.056950 0.23864  -1.00
+##  sender (Intercept)  0.523558 0.72357       
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)   
-## (Intercept)   0.22939    0.28112   0.816  0.41450   
-## veracityliar -0.57184    0.39871  -1.434  0.15151   
-## iri_pt        0.27783    0.12398   2.241  0.02503 * 
-## iri_ec       -0.12069    0.14921  -0.809  0.41858   
-## iri_fs        0.06726    0.09760   0.689  0.49076   
-## iri_pd        0.19330    0.12391   1.560  0.11875   
+## (Intercept)   0.22941    0.28112   0.816  0.41447   
+## veracityliar -0.57185    0.39871  -1.434  0.15150   
+## iri_pt        0.27782    0.12398   2.241  0.02504 * 
+## iri_ec       -0.12069    0.14921  -0.809  0.41859   
+## iri_fs        0.06725    0.09760   0.689  0.49079   
+## iri_pd        0.19330    0.12391   1.560  0.11876   
 ## r1g_st        0.10420    0.03443   3.027  0.00247 **
-## r2g_st       -0.09772    0.04030  -2.425  0.01530 * 
-## r3g_st        0.03599    0.03537   1.018  0.30891   
-## r4g_st        0.03405    0.04260   0.799  0.42403   
+## r2g_st       -0.09772    0.04030  -2.425  0.01531 * 
+## r3g_st        0.03599    0.03537   1.017  0.30892   
+## r4g_st        0.03405    0.04260   0.799  0.42407   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -217,7 +217,7 @@ summary(model_ei)
 ## r3g_st       0.000 -0.001 -0.092  0.181 -0.156 -0.053 -0.043 -0.169       
 ## r4g_st       0.001  0.000 -0.008 -0.288 -0.033  0.230 -0.033 -0.302 -0.284
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 Interestingly but perhaps unsurprisingly, the variance in intercepts for senders massively exceeds the variance in intercepts for receivers. The sender variance exceeds the receiver variance by a factor of more than 124. As in Bond and DePaulo (2008), accuracy is primarily determined by the sender, rather than by the receiver.
@@ -233,7 +233,7 @@ The increase in accuracy might be theoretically interesting, if this effect is t
 predict_plot
 ```
 
-![](C:/Users/RabbitSnore/Documents/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](C:/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 Below is a similar plot illustrating how mean predicted accuracy varies as a function of the Perspective Taking subscale on the trait empathy measure. A participant with the highest Perspective Taking score in the sample is predicted to have a mean accuracy of 54.9%.
 
@@ -242,7 +242,7 @@ Below is a similar plot illustrating how mean predicted accuracy varies as a fun
 predict_plot_pt
 ```
 
-![](C:/Users/RabbitSnore/Documents/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](C:/Projects/deception_ei/reports/main_report_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ## Exploration of Sender and Receiver Intercepts
 
@@ -381,29 +381,29 @@ summary(model_ei_sender_slopes)
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -2.3903 -0.8622 -0.4377  0.8891  2.5155 
+## -2.3903 -0.8622 -0.4377  0.8890  2.5155 
 ## 
 ## Random effects:
 ##  Groups Name         Variance  Std.Dev. Corr       
-##  ss     (Intercept)  4.147e-03 0.064399            
-##         veracityliar 5.660e-02 0.237903 -1.00      
-##  sender (Intercept)  5.247e-01 0.724343            
-##         iri_pt       4.325e-03 0.065768  1.00      
-##         r1g_st       9.104e-05 0.009541 -1.00 -1.00
+##  ss     (Intercept)  4.145e-03 0.064379            
+##         veracityliar 5.662e-02 0.237939 -1.00      
+##  sender (Intercept)  5.247e-01 0.724375            
+##         iri_pt       4.327e-03 0.065777  1.00      
+##         r1g_st       9.093e-05 0.009536 -1.00 -1.00
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)   
-## (Intercept)   0.24728    0.28892   0.856  0.39205   
-## veracityliar -0.60640    0.42139  -1.439  0.15014   
-## iri_pt        0.27747    0.12519   2.216  0.02666 * 
-## iri_ec       -0.12076    0.14916  -0.810  0.41815   
-## iri_fs        0.06739    0.09765   0.690  0.49011   
-## iri_pd        0.19386    0.12390   1.565  0.11766   
-## r1g_st        0.10421    0.03451   3.020  0.00253 **
+## (Intercept)   0.24722    0.28893   0.856  0.39218   
+## veracityliar -0.60629    0.42140  -1.439  0.15022   
+## iri_pt        0.27746    0.12519   2.216  0.02667 * 
+## iri_ec       -0.12071    0.14915  -0.809  0.41836   
+## iri_fs        0.06736    0.09765   0.690  0.49029   
+## iri_pd        0.19385    0.12390   1.565  0.11769   
+## r1g_st        0.10421    0.03451   3.019  0.00253 **
 ## r2g_st       -0.09774    0.04029  -2.426  0.01526 * 
-## r3g_st        0.03571    0.03535   1.010  0.31243   
-## r4g_st        0.03438    0.04259   0.807  0.41956   
+## r3g_st        0.03572    0.03535   1.010  0.31233   
+## r4g_st        0.03437    0.04259   0.807  0.41975   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -419,7 +419,7 @@ summary(model_ei_sender_slopes)
 ## r3g_st       0.001 -0.003 -0.092  0.181 -0.156 -0.053 -0.043 -0.169       
 ## r4g_st       0.002 -0.001 -0.008 -0.288 -0.032  0.230 -0.031 -0.303 -0.284
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 We see here there is virtually no variation in these random slopes. This lack of variation does not help clarify the mechanism by which Perceiving and Perspective Taking increase judgment accuracy. In fact, it raises more questions than it answers.
@@ -427,6 +427,26 @@ We see here there is virtually no variation in these random slopes. This lack of
 ## Signal Detection Theory approach
 
 From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, we calculated signal detection indices for each receiver. Specifically, we examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, we fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. we compared the models using an F-test, to select a preferred model.
+
+
+```r
+sdt_data %>% 
+  summarise(
+    mean_dprime   = mean(dprime),
+    sd_dprime     = sd(dprime),
+    median_dprime = median(dprime),
+    mean_c        = mean(c),
+    sd_c          = sd(c),
+    median_c      = median(c)
+  )
+```
+
+```
+## # A tibble: 1 × 6
+##   mean_dprime sd_dprime median_dprime mean_c  sd_c median_c
+##         <dbl>     <dbl>         <dbl>  <dbl> <dbl>    <dbl>
+## 1     -0.0524     0.641             0  0.154 0.322    0.157
+```
 
 For d-prime, the model comparison suggested that the model adding the EI subscales significantly improved the fit.
 
@@ -448,7 +468,7 @@ lrt_sdt_dprime
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same patter of significant coefficients, in the same directions.
+This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same pattern of significant coefficients, in the same directions.
 
 These results address some of the concerns raised in Timothy's review -- specifically that the results might be due to a change in bias rather than a change in discrimination.
 
@@ -533,6 +553,99 @@ summary(model_sdt_c_emp)
 
 In short, the signal detection approach supports the results from the raw accuracy models.
 
+### GLMM approach to SDT
+
+It is also possible to fit generalized linear (mixed) models to perform signal detection analysis (see DeCarlo, 1998, https://doi.org/10.1037/1082-989X.3.2.186). There are many ways to implement this approach. Here, we fit a series of probit models predicting participants' responses using the message's actual veracity. The intercept represents -1*c (bias), and the coefficient for actual veracity represents d-prime. Coefficients for the predictors represent the influence of those predictors on response bias (c). Interaction terms between veracity and the predictors of interest represent the effect of those predictors on d-prime. Following an approach analogous to the main analysis above, we fit a series of models and compared them with likelihood ratio tests.
+
+
+```r
+lrt_sdtglm
+```
+
+```
+## Data: sdtglm_data
+## Models:
+## sdtglm_base: response ~ veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+## sdtglm_emp: response ~ veracity_01 + iri_pt * veracity_01 + iri_ec * veracity_01 + iri_fs * veracity_01 + iri_pd * veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+## sdtglm_ei: response ~ veracity_01 + iri_pt * veracity_01 + iri_ec * veracity_01 + iri_fs * veracity_01 + iri_pd * veracity_01 + r1g_st * veracity_01 + r2g_st * veracity_01 + r3g_st * veracity_01 + r4g_st * veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+##             npar    AIC    BIC  logLik deviance   Chisq Df Pr(>Chisq)  
+## sdtglm_base    6 2700.6 2734.5 -1344.3   2688.6                        
+## sdtglm_emp    14 2708.0 2787.1 -1340.0   2680.0  8.6164  8    0.37568  
+## sdtglm_ei     22 2706.4 2830.7 -1331.2   2662.4 17.5470  8    0.02489 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+```r
+summary(sdtglm_ei)
+```
+
+```
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial  ( probit )
+## Formula: 
+## response ~ veracity_01 + iri_pt * veracity_01 + iri_ec * veracity_01 +  
+##     iri_fs * veracity_01 + iri_pd * veracity_01 + r1g_st * veracity_01 +  
+##     r2g_st * veracity_01 + r3g_st * veracity_01 + r4g_st * veracity_01 +  
+##     (1 + veracity_01 | ss) + (1 | sender)
+##    Data: sdtglm_data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   2706.4   2830.7  -1331.2   2662.4     2077 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.1245 -0.8314 -0.4918  0.9428  2.4998 
+## 
+## Random effects:
+##  Groups Name        Variance Std.Dev. Corr
+##  ss     (Intercept) 0.000316 0.01778      
+##         veracity_01 0.002425 0.04924  1.00
+##  sender (Intercept) 0.194838 0.44140      
+## Number of obs: 2099, groups:  ss, 150; sender, 14
+## 
+## Fixed effects:
+##                    Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)        -0.14071    0.17154  -0.820  0.41208   
+## veracity_01        -0.06621    0.24290  -0.273  0.78516   
+## iri_pt             -0.14723    0.10492  -1.403  0.16053   
+## iri_ec             -0.01377    0.12647  -0.109  0.91332   
+## iri_fs             -0.03358    0.08276  -0.406  0.68488   
+## iri_pd             -0.04835    0.10506  -0.460  0.64539   
+## r1g_st             -0.08961    0.02917  -3.072  0.00213 **
+## r2g_st              0.04830    0.03387   1.426  0.15388   
+## r3g_st             -0.03105    0.02995  -1.037  0.29993   
+## r4g_st              0.02168    0.03589   0.604  0.54577   
+## veracity_01:iri_pt  0.33951    0.15170   2.238  0.02522 * 
+## veracity_01:iri_ec -0.15289    0.18298  -0.836  0.40340   
+## veracity_01:iri_fs  0.08224    0.11945   0.688  0.49116   
+## veracity_01:iri_pd  0.24483    0.15165   1.615  0.10642   
+## veracity_01:r1g_st  0.12452    0.04213   2.956  0.00312 **
+## veracity_01:r2g_st -0.11881    0.04908  -2.421  0.01549 * 
+## veracity_01:r3g_st  0.03854    0.04316   0.893  0.37195   
+## veracity_01:r4g_st  0.04765    0.05174   0.921  0.35707   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```
+## 
+## Correlation matrix not shown by default, as p = 18 > 12.
+## Use print(x, correlation=TRUE)  or
+##     vcov(x)        if you need it
+```
+
+```
+## optimizer (Nelder_Mead) convergence code: 0 (OK)
+## boundary (singular) fit: see help('isSingular')
+```
+
+As can be seen, the results of this approach are highly similar to the logistic regression approach predicting accuracy and highly similar to the classical SDT approach. Again, we see that the clearest predictor of discrimination is the Perceiving subscale of the MSCEIT. 
+
+However, unlike in previous analyses, we can see here that the Perceiving subscale of the MSCEIT also predicts response bias, such that those higher on Perceiving are more truth biased. This result does not appear in the classical SDT approach above.
+
 # Hypothesis 2
 
 Next, we turned our attention to the question of whether emotional intelligence and trait empathy give receivers better accuracy-confidence calibration. This calibration can be represented as a coefficient for confidence predicting accuracy (at the judgment level), and an increase in calibration would be represented by an interaction term for confidence and either EI or empathy.
@@ -557,20 +670,20 @@ summary(model_conf_base)
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -1.8805 -0.8493 -0.4869  0.9093  2.0303 
+## -1.8803 -0.8493 -0.4869  0.9092  2.0303 
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr
-##  ss     (Intercept)  0.002489 0.04989      
-##         veracityliar 0.036414 0.19083  0.84
-##  sender (Intercept)  0.516046 0.71836      
+##  ss     (Intercept)  0.002532 0.05032      
+##         veracityliar 0.036485 0.19101  0.83
+##  sender (Intercept)  0.516055 0.71837      
 ## Number of obs: 2091, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##                Estimate Std. Error z value Pr(>|z|)
-## (Intercept)   0.2269753  0.2791275   0.813    0.416
-## veracityliar -0.5688607  0.3957945  -1.437    0.151
-## confidence    0.0005529  0.0251293   0.022    0.982
+## (Intercept)   0.2269722  0.2791398   0.813    0.416
+## veracityliar -0.5688481  0.3958213  -1.437    0.151
+## confidence    0.0005533  0.0251294   0.022    0.982
 ## 
 ## Correlation of Fixed Effects:
 ##             (Intr) vrctyl
@@ -594,7 +707,7 @@ lrt_confidence
 ##                   npar    AIC    BIC  logLik deviance   Chisq Df Pr(>Chisq)   
 ## model_conf_base      7 2692.1 2731.6 -1339.0   2678.1                         
 ## model_conf_ei        9 2685.2 2736.0 -1333.6   2667.2 10.8628  2   0.004377 **
-## model_conf_ei_int   11 2689.0 2751.1 -1333.5   2667.0  0.2235  2   0.894254   
+## model_conf_ei_int   11 2689.0 2751.1 -1333.5   2667.0  0.2235  2   0.894253   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -625,16 +738,16 @@ summary(model_conf_ei)
 ##  Groups Name         Variance Std.Dev. Corr 
 ##  ss     (Intercept)  0.001129 0.0336        
 ##         veracityliar 0.067044 0.2589   -1.00
-##  sender (Intercept)  0.520884 0.7217        
+##  sender (Intercept)  0.520881 0.7217        
 ## Number of obs: 2091, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error z value Pr(>|z|)  
-## (Intercept)   0.227776   0.280373   0.812   0.4166  
-## veracityliar -0.571200   0.397842  -1.436   0.1511  
-## confidence   -0.002329   0.025135  -0.093   0.9262  
+## (Intercept)   0.227780   0.280363   0.812   0.4165  
+## veracityliar -0.571209   0.397832  -1.436   0.1511  
+## confidence   -0.002328   0.025135  -0.093   0.9262  
 ## r1g_st        0.080487   0.032174   2.502   0.0124 *
-## iri_pt        0.210300   0.110837   1.897   0.0578 .
+## iri_pt        0.210297   0.110836   1.897   0.0578 .
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -645,12 +758,91 @@ summary(model_conf_ei)
 ## r1g_st       0.001 -0.005 -0.021       
 ## iri_pt       0.001 -0.002 -0.043 -0.093
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
+
+## Signal Detection Approach (GLMM)
+
+It is also possible to assess the confidence-accuracy relationship in an SDT framework, following the same approach as with the above SDT analyses. Here, we fit three models analogous to the confidence-accuracy models above.
+
+
+```r
+lrt_sdtglm_conf
+```
+
+```
+## Data: sdtglm_data
+## Models:
+## sdtglm_conf_base: response ~ veracity_01 + confidence * veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+## sdtglm_conf_emp: response ~ veracity_01 + confidence * veracity_01 + r1g_st * veracity_01 + iri_pt * veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+## sdtglm_conf_int: response ~ veracity_01 + confidence * veracity_01 + r1g_st * confidence * veracity_01 + iri_pt * confidence * veracity_01 + (1 + veracity_01 | ss) + (1 | sender)
+##                  npar    AIC    BIC  logLik deviance   Chisq Df Pr(>Chisq)  
+## sdtglm_conf_base    8 2692.8 2737.9 -1338.4   2676.8                        
+## sdtglm_conf_emp    12 2688.5 2756.2 -1332.2   2664.5 12.2752  4    0.01542 *
+## sdtglm_conf_int    16 2694.2 2784.6 -1331.1   2662.2  2.2487  4    0.69013  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+```r
+summary(sdtglm_conf_emp)
+```
+
+```
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial  ( probit )
+## Formula: response ~ veracity_01 + confidence * veracity_01 + r1g_st *  
+##     veracity_01 + iri_pt * veracity_01 + (1 + veracity_01 | ss) +  
+##     (1 | sender)
+##    Data: sdtglm_data
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   2688.5   2756.2  -1332.3   2664.5     2079 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.9487 -0.8333 -0.4964  0.9503  2.2583 
+## 
+## Random effects:
+##  Groups Name        Variance Std.Dev. Corr
+##  ss     (Intercept) 0.00000  0.0000       
+##         veracity_01 0.01847  0.1359    NaN
+##  sender (Intercept) 0.19197  0.4381       
+## Number of obs: 2091, groups:  ss, 150; sender, 14
+## 
+## Fixed effects:
+##                         Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)            -0.142038   0.170352  -0.834  0.40440   
+## veracity_01            -0.066513   0.241467  -0.275  0.78297   
+## confidence             -0.014668   0.020835  -0.704  0.48142   
+## r1g_st                 -0.071385   0.026952  -2.649  0.00808 **
+## iri_pt                 -0.123788   0.092933  -1.332  0.18285   
+## veracity_01:confidence -0.005405   0.030910  -0.175  0.86119   
+## veracity_01:r1g_st      0.094037   0.039766   2.365  0.01804 * 
+## veracity_01:iri_pt      0.258175   0.136958   1.885  0.05942 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) vrc_01 cnfdnc r1g_st iri_pt vr_01: v_01:1
+## veracity_01 -0.705                                          
+## confidence   0.016 -0.011                                   
+## r1g_st       0.002 -0.001 -0.023                            
+## iri_pt       0.001  0.000 -0.044 -0.104                     
+## vrcty_01:cn -0.011  0.008 -0.674  0.016  0.029              
+## vrcty_01:1_ -0.001 -0.001  0.016 -0.678  0.071 -0.012       
+## vrcty_01:r_  0.000  0.000  0.030  0.071 -0.679 -0.044 -0.101
+## optimizer (Nelder_Mead) convergence code: 0 (OK)
+## boundary (singular) fit: see help('isSingular')
+```
+
+Once again, we see that the SDT approach yields basically the same results as the raw accuracy approach. Confidence does not appear to predict truth-lie discrimination (as measured by d-prime). Indeed, the estimated relationship (i.e., the interaction term between confidence and veracity) is very close to zero.
 
 # Hypothesis 3
 
-The third research question concerned whether emotional intelligence and trait empathy predicted the judgment critiera provided by the receivers. Receivers' listed critiera were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
+The third research question concerned whether emotional intelligence and trait empathy predicted the judgment criteria provided by the receivers. Receivers' listed criteria were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
 
 For each of these categories, we fit and compared a series of linear mixed effects models. In the first model, the number of criteria listed was predicted by veracity, with random intercepts and slopes for each receiver and random intercepts for each sender. In the second model, the four empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors. We compared each of these models using likelihood ratio tests to find a preferred model.
 
@@ -782,7 +974,7 @@ summary(emotion_models[[2]])
 ## iri_fs      -0.260  0.000 -0.002 -0.232       
 ## iri_pd      -0.376  0.000  0.254 -0.347 -0.079
 ## optimizer (nloptwrap) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 ## Expressive Indices
@@ -844,7 +1036,7 @@ summary(expressive_models[[1]])
 ##             (Intr)
 ## veracitylir -0.690
 ## optimizer (nloptwrap) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 ## Paraverbal Aspects
@@ -934,9 +1126,9 @@ summary(model_base)
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr
-##  ss     (Intercept)  0.003755 0.06127      
-##         veracityliar 0.033343 0.18260  1.00
-##  sender (Intercept)  0.517374 0.71929      
+##  ss     (Intercept)  0.003754 0.06127      
+##         veracityliar 0.033344 0.18260  1.00
+##  sender (Intercept)  0.517378 0.71929      
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
@@ -948,7 +1140,7 @@ summary(model_base)
 ##             (Intr)
 ## veracitylir -0.704
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 The model adding the trait empathy measures.
@@ -971,23 +1163,23 @@ summary(model_emp)
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -2.2392 -0.8589 -0.4616  0.8984  2.2248 
+## -2.2392 -0.8589 -0.4616  0.8984  2.2249 
 ## 
 ## Random effects:
 ##  Groups Name         Variance  Std.Dev. Corr 
-##  ss     (Intercept)  0.0001297 0.01139       
-##         veracityliar 0.0417038 0.20422  -1.00
-##  sender (Intercept)  0.5176136 0.71945       
+##  ss     (Intercept)  0.0001301 0.0114        
+##         veracityliar 0.0417040 0.2042   -1.00
+##  sender (Intercept)  0.5176627 0.7195        
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)  
-## (Intercept)   0.22785    0.27949   0.815   0.4149  
-## veracityliar -0.56868    0.39636  -1.435   0.1514  
-## iri_pt        0.29238    0.12275   2.382   0.0172 *
-## iri_ec       -0.10523    0.14263  -0.738   0.4606  
-## iri_fs        0.07215    0.09609   0.751   0.4527  
-## iri_pd        0.18456    0.11909   1.550   0.1212  
+## (Intercept)   0.22782    0.27951   0.815   0.4150  
+## veracityliar -0.56862    0.39640  -1.434   0.1514  
+## iri_pt        0.29240    0.12275   2.382   0.0172 *
+## iri_ec       -0.10522    0.14263  -0.738   0.4607  
+## iri_fs        0.07215    0.09609   0.751   0.4528  
+## iri_pd        0.18455    0.11909   1.550   0.1212  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -1022,24 +1214,24 @@ summary(model_conf_ei_int)
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -2.1722 -0.8648 -0.4501  0.8957  2.4042 
+## -2.1722 -0.8648 -0.4501  0.8957  2.4041 
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr 
-##  ss     (Intercept)  0.00103  0.0321        
-##         veracityliar 0.06569  0.2563   -1.00
-##  sender (Intercept)  0.52140  0.7221        
+##  ss     (Intercept)  0.001027 0.03205       
+##         veracityliar 0.065677 0.25628  -1.00
+##  sender (Intercept)  0.521373 0.72206       
 ## Number of obs: 2091, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##                    Estimate Std. Error z value Pr(>|z|)  
-## (Intercept)        0.227545   0.280523   0.811   0.4173  
-## veracityliar      -0.570233   0.398036  -1.433   0.1520  
-## confidence        -0.002890   0.025230  -0.115   0.9088  
-## r1g_st             0.080862   0.032254   2.507   0.0122 *
-## iri_pt             0.213242   0.111073   1.920   0.0549 .
-## confidence:r1g_st  0.006754   0.016270   0.415   0.6781  
-## confidence:iri_pt -0.014791   0.056243  -0.263   0.7926  
+## (Intercept)        0.227668   0.280519   0.812   0.4170  
+## veracityliar      -0.570497   0.398029  -1.433   0.1518  
+## confidence        -0.002892   0.025230  -0.115   0.9088  
+## r1g_st             0.080839   0.032254   2.506   0.0122 *
+## iri_pt             0.213248   0.111075   1.920   0.0549 .
+## confidence:r1g_st  0.006748   0.016270   0.415   0.6783  
+## confidence:iri_pt -0.014779   0.056244  -0.263   0.7927  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -1079,19 +1271,19 @@ summary(model_ei_red)
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr 
-##  ss     (Intercept)  0.001218 0.03491       
-##         veracityliar 0.059767 0.24447  -1.00
-##  sender (Intercept)  0.521755 0.72233       
+##  ss     (Intercept)  0.001218 0.0349        
+##         veracityliar 0.059765 0.2445   -1.00
+##  sender (Intercept)  0.521739 0.7223        
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)   
-## (Intercept)   0.22845    0.28060   0.814  0.41555   
-## veracityliar -0.57068    0.39806  -1.434  0.15168   
+## (Intercept)   0.22845    0.28062   0.814  0.41559   
+## veracityliar -0.57066    0.39810  -1.433  0.15172   
 ## r1g_st        0.10417    0.03449   3.021  0.00252 **
 ## r2g_st       -0.09937    0.04003  -2.483  0.01304 * 
-## r3g_st        0.04620    0.03467   1.333  0.18268   
-## r4g_st        0.03210    0.03995   0.804  0.42167   
+## r3g_st        0.04620    0.03467   1.333  0.18269   
+## r4g_st        0.03210    0.03995   0.804  0.42162   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -1103,7 +1295,7 @@ summary(model_ei_red)
 ## r3g_st       0.001 -0.002 -0.033 -0.174       
 ## r4g_st       0.001  0.000 -0.035 -0.331 -0.273
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 The coefficient for EI Perceiving remains significant when removing other predictors.
@@ -1147,7 +1339,7 @@ summary(model_ei_per)
 ## veracitylir -0.705       
 ## r1g_st       0.002 -0.005
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 The negative coefficient for EI Using becomes nonsignificant when other predictors are removed.
 
@@ -1172,15 +1364,15 @@ summary(model_ei_use)
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr
-##  ss     (Intercept)  0.003303 0.05748      
-##         veracityliar 0.031844 0.17845  1.00
-##  sender (Intercept)  0.517100 0.71910      
+##  ss     (Intercept)  0.003304 0.05748      
+##         veracityliar 0.031843 0.17845  1.00
+##  sender (Intercept)  0.517101 0.71910      
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)
-## (Intercept)   0.22709    0.27939   0.813    0.416
-## veracityliar -0.56804    0.39610  -1.434    0.152
+## (Intercept)   0.22709    0.27938   0.813    0.416
+## veracityliar -0.56804    0.39609  -1.434    0.152
 ## r2g_st       -0.02827    0.03403  -0.831    0.406
 ## 
 ## Correlation of Fixed Effects:
@@ -1188,7 +1380,7 @@ summary(model_ei_use)
 ## veracitylir -0.705       
 ## r2g_st       0.000  0.001
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 Additionally, EI total scores and EI bifactor scores do not predict accuracy.
@@ -1215,15 +1407,15 @@ summary(model_ei_sub)
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr
-##  ss     (Intercept)  0.001478 0.03845      
-##         veracityliar 0.036680 0.19152  1.00
-##  sender (Intercept)  0.517512 0.71938      
+##  ss     (Intercept)  0.001478 0.03844      
+##         veracityliar 0.036682 0.19153  1.00
+##  sender (Intercept)  0.517517 0.71939      
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error z value Pr(>|z|)
-## (Intercept)  -0.384435   0.498577  -0.771    0.441
-## veracityliar -0.568360   0.396289  -1.434    0.152
+## (Intercept)  -0.384438   0.498513  -0.771    0.441
+## veracityliar -0.568360   0.396247  -1.434    0.151
 ## expg_st       0.001265   0.003788   0.334    0.738
 ## strg_st       0.004515   0.003463   1.304    0.192
 ## 
@@ -1233,7 +1425,10 @@ summary(model_ei_sub)
 ## expg_st     -0.477 -0.002       
 ## strg_st     -0.424 -0.001 -0.407
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## Model is nearly unidentifiable: very large eigenvalue
+##  - Rescale variables?
+## Model is nearly unidentifiable: large eigenvalue ratio
+##  - Rescale variables?
 ```
 
 
@@ -1259,13 +1454,13 @@ summary(model_ei_tot)
 ##  Groups Name         Variance Std.Dev. Corr
 ##  ss     (Intercept)  0.001688 0.04108      
 ##         veracityliar 0.041842 0.20455  1.00
-##  sender (Intercept)  0.518353 0.71997      
+##  sender (Intercept)  0.518347 0.71996      
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error z value Pr(>|z|)
-## (Intercept)  -0.274502   0.457431  -0.600    0.548
-## veracityliar -0.568762   0.396667  -1.434    0.152
+## (Intercept)  -0.274544   0.457413  -0.600    0.548
+## veracityliar -0.568731   0.396638  -1.434    0.152
 ## ttg_st        0.004802   0.003467   1.385    0.166
 ## 
 ## Correlation of Fixed Effects:
@@ -1273,7 +1468,8 @@ summary(model_ei_tot)
 ## veracitylir -0.429       
 ## ttg_st      -0.791 -0.003
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## Model is nearly unidentifiable: large eigenvalue ratio
+##  - Rescale variables?
 ```
 
 # Exploratory analyses
@@ -1281,13 +1477,13 @@ summary(model_ei_tot)
 A reviewer requested an analysis of gender differences. 
 
 Descriptively, it does seem as though women tend to score slightly higher on the
-EI and empathy measures than men, but these tendences are quite small. For the
+EI and empathy measures than men, but these tendencies are quite small. For the
 empathy measures, three out of the four differences between men and women were 
 statistically significant, for what it is worth.
 
 
 ```
-## # A tibble: 2 x 9
+## # A tibble: 2 × 9
 ##     sex mean_pt sd_pt mean_ec sd_ec mean_fs sd_fs mean_pd sd_pd
 ##   <dbl>   <dbl> <dbl>   <dbl> <dbl>   <dbl> <dbl>   <dbl> <dbl>
 ## 1     0    25.4  4.12    28.7  3.45    23.6  5.23    20.9  4.04
@@ -1311,7 +1507,7 @@ emotion %>%
 ```
 
 ```
-## # A tibble: 2 x 9
+## # A tibble: 2 × 9
 ##     sex mean_r1g sd_r1g mean_r2g sd_r2g mean_r3g sd_r3g mean_r4g sd_r4g
 ##   <dbl>    <dbl>  <dbl>    <dbl>  <dbl>    <dbl>  <dbl>    <dbl>  <dbl>
 ## 1     0     106.   15.6    100.    14.7     107.   14.5     104.   13.8
@@ -1347,7 +1543,7 @@ summary(gender_mod_1)
 ##  Groups Name         Variance Std.Dev. Corr
 ##  ss     (Intercept)  0.002351 0.04849      
 ##         veracityliar 0.036401 0.19079  1.00
-##  sender (Intercept)  0.517616 0.71946      
+##  sender (Intercept)  0.517619 0.71946      
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
@@ -1361,7 +1557,7 @@ summary(gender_mod_1)
 ## veracitylir -0.700       
 ## sex         -0.112  0.002
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 
@@ -1386,24 +1582,24 @@ summary(gender_mod_2)
 ## 
 ## Random effects:
 ##  Groups Name         Variance Std.Dev. Corr 
-##  ss     (Intercept)  0.004271 0.06536       
-##         veracityliar 0.057163 0.23909  -1.00
-##  sender (Intercept)  0.523631 0.72362       
+##  ss     (Intercept)  0.004272 0.06536       
+##         veracityliar 0.057151 0.23906  -1.00
+##  sender (Intercept)  0.523666 0.72365       
 ## Number of obs: 2099, groups:  ss, 150; sender, 14
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error z value Pr(>|z|)   
-## (Intercept)   0.24465    0.28337   0.863  0.38795   
-## veracityliar -0.57192    0.39879  -1.434  0.15153   
+## (Intercept)   0.24466    0.28335   0.863  0.38790   
+## veracityliar -0.57188    0.39874  -1.434  0.15151   
 ## iri_pt        0.27524    0.12414   2.217  0.02661 * 
-## iri_ec       -0.13702    0.15392  -0.890  0.37336   
-## iri_fs        0.06398    0.09790   0.654  0.51339   
-## iri_pd        0.17856    0.12852   1.389  0.16472   
+## iri_ec       -0.13702    0.15391  -0.890  0.37334   
+## iri_fs        0.06396    0.09789   0.653  0.51353   
+## iri_pd        0.17857    0.12852   1.389  0.16470   
 ## r1g_st        0.10296    0.03454   2.981  0.00287 **
 ## r2g_st       -0.09906    0.04041  -2.451  0.01423 * 
-## r3g_st        0.03678    0.03542   1.039  0.29903   
-## r4g_st        0.03467    0.04261   0.814  0.41584   
-## sex          -0.05066    0.11722  -0.432  0.66558   
+## r3g_st        0.03678    0.03542   1.039  0.29902   
+## r4g_st        0.03468    0.04261   0.814  0.41579   
+## sex          -0.05068    0.11722  -0.432  0.66549   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -1416,7 +1612,7 @@ summary(gender_mod_2)
 ## iri_pd      -0.031 -0.002  0.221 -0.299 -0.051                            
 ## r1g_st      -0.008 -0.005 -0.019  0.012  0.092  0.023                     
 ## r2g_st      -0.011  0.003 -0.066  0.049  0.069  0.089 -0.294              
-## r3g_st       0.007 -0.001 -0.094  0.163 -0.159 -0.065 -0.047 -0.173       
+## r3g_st       0.007 -0.002 -0.094  0.163 -0.159 -0.065 -0.047 -0.173       
 ## r4g_st       0.006  0.000 -0.010 -0.287 -0.036  0.213 -0.036 -0.303 -0.281
 ## sex         -0.125  0.001  0.048  0.245  0.077  0.265  0.082  0.077 -0.053
 ##             r4g_st
@@ -1431,7 +1627,7 @@ summary(gender_mod_2)
 ## r4g_st            
 ## sex         -0.033
 ## optimizer (Nelder_Mead) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see help('isSingular')
 ```
 
 As can be seen in these results, neither model supports the notiion of gender

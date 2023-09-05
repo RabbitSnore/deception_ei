@@ -138,3 +138,101 @@ model_ei_c_sdt <- lm(c ~ iri_pt + iri_ec + iri_fs + iri_pd
 
 lrt_sdt_bias <- anova(model_sdt_c_emp, model_ei_c_sdt)
 
+# GLM approach to SDT ----------------------------------------------------------
+
+# wrangle data
+
+sdtglm_data <- model_data %>% 
+  mutate(
+    response = case_when(
+      veracity == "liar"  & accuracy == 1 ~ 1,
+      veracity == "liar"  & accuracy == 0 ~ 0,
+      veracity == "truth" & accuracy == 1 ~ 0,
+      veracity == "truth" & accuracy == 0 ~ 1
+    ),
+    veracity_01 = case_when(
+      veracity == "liar"   ~ 1,
+      veracity == "truth"  ~ 0
+    )
+  )
+
+# Fit SDT GLMs
+
+sdtglm_base <- glmer(response 
+                     ~ veracity_01 
+                     + (1 + veracity_01|ss) 
+                     + (1|sender), 
+                     data = sdtglm_data, 
+                     family = binomial(link = "probit"))
+
+### Add empathy
+
+sdtglm_emp <- glmer(response 
+                   ~ veracity_01 
+                   + iri_pt * veracity_01
+                   + iri_ec * veracity_01 
+                   + iri_fs * veracity_01
+                   + iri_pd * veracity_01
+                   + (1 + veracity_01|ss) 
+                   + (1|sender), 
+                   data = sdtglm_data, 
+                   family = binomial(link = "probit"))
+
+### Add emotional intelligence
+
+sdtglm_ei <- glmer(response 
+                  ~ veracity_01 
+                  + iri_pt * veracity_01
+                  + iri_ec * veracity_01 
+                  + iri_fs * veracity_01
+                  + iri_pd * veracity_01
+                  + r1g_st * veracity_01 
+                  + r2g_st * veracity_01 
+                  + r3g_st * veracity_01 
+                  + r4g_st * veracity_01 
+                  + (1 + veracity_01|ss) 
+                  + (1|sender), 
+                  data = sdtglm_data, 
+                  family = binomial(link = "probit"))
+
+### Compare models
+
+lrt_sdtglm <- anova(sdtglm_base, sdtglm_emp, sdtglm_ei)
+
+# Confidence models
+
+sdtglm_conf_base <- glmer(response
+                          ~ veracity_01 
+                          + confidence * veracity_01
+                          + (1 + veracity_01|ss) 
+                          + (1|sender), 
+                          data = sdtglm_data, 
+                          family = binomial(link = "probit"))
+
+## Add empathy and EI subscales
+
+sdtglm_conf_emp  <- glmer(response
+                          ~ veracity_01 
+                          + confidence * veracity_01
+                          + r1g_st * veracity_01
+                          + iri_pt * veracity_01
+                          + (1 + veracity_01|ss) 
+                          + (1|sender), 
+                          data = sdtglm_data, 
+                          family = binomial(link = "probit"))
+
+## Interactions with confidence
+
+sdtglm_conf_int  <- glmer(response
+                          ~ veracity_01 
+                          + confidence * veracity_01
+                          + r1g_st * confidence * veracity_01
+                          + iri_pt * confidence * veracity_01
+                          + (1 + veracity_01|ss) 
+                          + (1|sender), 
+                          data = sdtglm_data, 
+                          family = binomial(link = "probit"))
+
+## Compare models
+
+lrt_sdtglm_conf <- anova(sdtglm_conf_base, sdtglm_conf_emp, sdtglm_conf_int)

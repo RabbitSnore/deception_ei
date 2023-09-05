@@ -151,13 +151,25 @@ We see here there is virtually no variation in these random slopes. This lack of
 
 From the above analyses, we cannot safely assume that the increases in accuracy associated with EI and empathy are not due to changes in bias, rather than changes in discrimination. For that reason, we calculated signal detection indices for each receiver. Specifically, we examined d-prime (a measure of discrimination) and c (a measure of bias). For each index, we fit a series of linear regressions predicting the index, first adding the empathy subscales as predictors and then adding the EI subscales as predictors. we compared the models using an F-test, to select a preferred model.
 
+```{r}
+sdt_data %>% 
+  summarise(
+    mean_dprime   = mean(dprime),
+    sd_dprime     = sd(dprime),
+    median_dprime = median(dprime),
+    mean_c        = mean(c),
+    sd_c          = sd(c),
+    median_c      = median(c)
+  )
+```
+
 For d-prime, the model comparison suggested that the model adding the EI subscales significantly improved the fit.
 
 ```{r}
 lrt_sdt_dprime
 ```
 
-This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same patter of significant coefficients, in the same directions.
+This model effectively replicates the results from the logistic regression of the raw accuracy reported above. We see the same pattern of significant coefficients, in the same directions.
 
 These results address some of the concerns raised in Timothy's review -- specifically that the results might be due to a change in bias rather than a change in discrimination.
 
@@ -176,6 +188,22 @@ summary(model_sdt_c_emp)
 ```
 
 In short, the signal detection approach supports the results from the raw accuracy models.
+
+### GLMM approach to SDT
+
+It is also possible to fit generalized linear (mixed) models to perform signal detection analysis (see DeCarlo, 1998, https://doi.org/10.1037/1082-989X.3.2.186). There are many ways to implement this approach. Here, we fit a series of probit models predicting participants' responses using the message's actual veracity. The intercept represents -1*c (bias), and the coefficient for actual veracity represents d-prime. Coefficients for the predictors represent the influence of those predictors on response bias (c). Interaction terms between veracity and the predictors of interest represent the effect of those predictors on d-prime. Following an approach analogous to the main analysis above, we fit a series of models and compared them with likelihood ratio tests.
+
+```{r}
+lrt_sdtglm
+```
+
+```{r}
+summary(sdtglm_ei)
+```
+
+As can be seen, the results of this approach are highly similar to the logistic regression approach predicting accuracy and highly similar to the classical SDT approach. Again, we see that the clearest predictor of discrimination is the Perceiving subscale of the MSCEIT. 
+
+However, unlike in previous analyses, we can see here that the Perceiving subscale of the MSCEIT also predicts response bias, such that those higher on Perceiving are more truth biased. This result does not appear in the classical SDT approach above.
 
 # Hypothesis 2
 
@@ -199,9 +227,23 @@ Since the interaction terms did not improve the model fit, there does not appear
 summary(model_conf_ei)
 ```
 
+## Signal Detection Approach (GLMM)
+
+It is also possible to assess the confidence-accuracy relationship in an SDT framework, following the same approach as with the above SDT analyses. Here, we fit three models analogous to the confidence-accuracy models above.
+
+```{r}
+lrt_sdtglm_conf
+```
+
+```{r}
+summary(sdtglm_conf_emp)
+```
+
+Once again, we see that the SDT approach yields basically the same results as the raw accuracy approach. Confidence does not appear to predict truth-lie discrimination (as measured by d-prime). Indeed, the estimated relationship (i.e., the interaction term between confidence and veracity) is very close to zero.
+
 # Hypothesis 3
 
-The third research question concerned whether emotional intelligence and trait empathy predicted the judgment critiera provided by the receivers. Receivers' listed critiera were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
+The third research question concerned whether emotional intelligence and trait empathy predicted the judgment criteria provided by the receivers. Receivers' listed criteria were coded into four categories: cognitive complexity, emotional features, expressive indices, and paraverbal aspects.
 
 For each of these categories, we fit and compared a series of linear mixed effects models. In the first model, the number of criteria listed was predicted by veracity, with random intercepts and slopes for each receiver and random intercepts for each sender. In the second model, the four empathy subscales were added as predictors. In the third model, the four emotional intelligence subscales were added as predictors. We compared each of these models using likelihood ratio tests to find a preferred model.
 
@@ -313,7 +355,7 @@ summary(model_ei_tot)
 A reviewer requested an analysis of gender differences. 
 
 Descriptively, it does seem as though women tend to score slightly higher on the
-EI and empathy measures than men, but these tendences are quite small. For the
+EI and empathy measures than men, but these tendencies are quite small. For the
 empathy measures, three out of the four differences between men and women were 
 statistically significant, for what it is worth.
 

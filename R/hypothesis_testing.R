@@ -331,7 +331,7 @@ model_ei_tot <- glmer(accuracy ~ veracity + ttg_st
                       )
 # No significant effect for the EI total score
 
-# HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence -------
+# HYPOTHESIS 2: Emotional intelligence, empathy, accuracy, and confidence ------
 
 ## Does emotional intelligence make confidence (more) predictive of accuracy?
 
